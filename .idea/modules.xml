@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Smoothstack.iml" filepath="$PROJECT_DIR$/Smoothstack.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Smoothstack.iml" filepath="$PROJECT_DIR$/.idea/Smoothstack.iml" />
     </modules>
   </component>
 </project>
