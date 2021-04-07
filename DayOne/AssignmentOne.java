@@ -18,6 +18,8 @@ public class AssignmentOne {
     public static void main(String[] args) throws NumberFormatException, IOException {
         // TODO Auto-generated method stub
 
+        System.out.println("testing");
+
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
 
 
