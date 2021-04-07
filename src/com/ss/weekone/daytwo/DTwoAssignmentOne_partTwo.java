@@ -2,6 +2,10 @@ package com.ss.weekone.daytwo;
 
 import java.util.Scanner;
 
+/**
+ * @author charvin
+ */
+
 public class DTwoAssignmentOne_partTwo {
 
     // Takes user input to decide how big is 2D Array

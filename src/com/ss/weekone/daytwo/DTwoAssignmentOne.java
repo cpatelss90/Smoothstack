@@ -1,5 +1,9 @@
 package com.ss.weekone.daytwo;
 
+/**
+ * @author charvin
+ */
+
 
 // Takes arguments from command line and adds all the numbers
 // If variable num is not an int then a exception is thrown and caught

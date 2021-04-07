@@ -1,5 +1,9 @@
 package com.ss.weekone.daytwo;
 
+/**
+ * @author charvin
+ */
+
 public class Triangle implements Shape {
 
     @Override

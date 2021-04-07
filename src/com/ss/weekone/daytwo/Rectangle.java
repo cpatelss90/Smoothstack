@@ -1,5 +1,9 @@
 package com.ss.weekone.daytwo;
 
+/**
+ * @author charvin
+ */
+
 public class Rectangle implements Shape {
     @Override
     public double calculateArea(double x, int y) {
