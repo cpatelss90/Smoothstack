@@ -1,7 +1,7 @@
 package com.ss.weekone.dayone;
 
 /**
- * @author Charvin Patel.
+ * @author Charvin Patel
  */
 
 public class DoneAssignmentOne_partTwo {
