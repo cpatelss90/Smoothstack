@@ -8,7 +8,6 @@ import java.util.List;
 
 /**
  * @author Charvin Patel
- * check
  */
 
 public class DThreeAssignmentOne {
