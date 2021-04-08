@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 
 
 /**
- * @author Charvin Patel
+ * @author Charvin Patel.
  */
 
 public class DThreeAssignmentOne_partTwo {
