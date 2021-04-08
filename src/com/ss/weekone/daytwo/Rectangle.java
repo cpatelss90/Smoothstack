@@ -1,7 +1,7 @@
 package com.ss.weekone.daytwo;
 
 /**
- * @author charvin
+ * @author Charvin Patel
  */
 
 public class Rectangle implements Shape {

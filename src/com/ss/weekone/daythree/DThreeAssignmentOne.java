@@ -6,8 +6,13 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Charvin Patel
+ */
+
 public class DThreeAssignmentOne {
 
+    // This functions recursively find all the files in a given path
     public static void listFiles(File path, List<File> filePaths) {
 
         for (File s : path.listFiles()) {
@@ -18,9 +23,13 @@ public class DThreeAssignmentOne {
                 listFiles(new File(s.getAbsolutePath()), filePaths);
             }
         }
-
     }
 
+
+
+    // This function takes user input for a path and
+    // calls the listFiles() to lists all the files
+    // in a path
     public static void main(String[] args) {
         boolean validPath = true;
 

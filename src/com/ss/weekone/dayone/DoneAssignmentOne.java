@@ -6,8 +6,9 @@ import java.io.InputStreamReader;
 import java.util.Random;
 
 /**
- * @author charvin
+ * @author Charvin Patel
  */
+
 public class DoneAssignmentOne {
 
     /**

@@ -3,7 +3,7 @@ package com.ss.weekone.daytwo;
 import java.util.Scanner;
 
 /**
- * @author charvin
+ * @author Charvin Patel
  */
 
 public class DTwoAssignmentOne_partTwo {
