@@ -6,19 +6,19 @@ package com.ss.weekone.daytwo;
 
 public class Triangle implements Shape {
 
-    @Override
-    public double calculateArea(double x, int y) {
+	@Override
+	public double calculateArea(double x, int y) {
 
-        return (x*y)/2;
-    }
+		return (x * y) / 2;
+	}
 
-    @Override
-    public void display() {
+	@Override
+	public void display() {
 
-        double base = 4;
-        int height = 6;
+		double base = 4;
+		int height = 6;
 
-        System.out.println("Area of Triangle is " + calculateArea(base,height));
+		System.out.println("Area of Triangle is " + calculateArea(base, height));
 
-    }
+	}
 }
