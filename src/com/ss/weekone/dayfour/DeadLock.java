@@ -1,5 +1,9 @@
 package com.ss.weekone.dayfour;
 
+/**
+ * @author Charvin Patel
+ */
+
 
 // Main Class where we execute both threads
 public class DeadLock{

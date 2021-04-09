@@ -1,5 +1,9 @@
 package com.ss.weekone.dayfour;
 
+/**
+ * @author Charvin Patel
+ */
+
 
 // Have two threads which acquires each others lock which leads to deadlock
 public class MultiThreading{

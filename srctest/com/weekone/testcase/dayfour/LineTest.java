@@ -1,5 +1,10 @@
 package com.weekone.testcase.dayfour;
 
+/**
+ * @author Charvin Patel
+ */
+
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -27,17 +32,17 @@ class LineTest {
 	}
 
 	@Test
-	void testgetSlope() {
+	void testGetSlope() {
 		assertEquals(2, l.getSlope());
 	}
 
 	@Test
-	void testgetDistance() {
+	void testGetDistance() {
 		assertEquals(4.4721, l.getDistance(), 0.0001);
 	}
 
 	@Test
-	void testparallelTo() {
+	void testParallelTo() {
 		// l = new Line()
 		assertEquals(true, l.parallelTo(l));
 	}

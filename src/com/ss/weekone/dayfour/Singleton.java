@@ -1,5 +1,9 @@
 package com.ss.weekone.dayfour;
 
+/**
+ * @author Charvin Patel
+ */
+
 
 // This class make sure's there's only one instance of this class
 // at any given point of time
