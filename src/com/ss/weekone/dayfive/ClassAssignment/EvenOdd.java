@@ -6,13 +6,24 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * @author Charvin Patel
+ */
+
+
+// Main class which prepends letter 'e' to even nums and letter 'o' to odd nums
 public class EvenOdd {
 	
+	// for testing purpose only since junit dont allow to test lambda function
+		public List<String> testEvenOdd(String s){
+			return evenOdd.evenOdd(s);
+		}
+		
 	
+	// lambda function to prepend 'e' or 'o'
 	static EvenOddInterface evenOdd = (s) -> {
 		
 		String[] strArr = null;
@@ -50,7 +61,7 @@ public class EvenOdd {
 		BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
 		List<String> lst = new ArrayList<>();
 		try {
-			System.out.println("Please enter array of ints seperated by comma...");
+			System.out.println("Please enter array of ints seperated by comma and No Space in between");
 			String s = read.readLine();
 		    lst = evenOdd.evenOdd(s);
 		    System.out.println("Ans: " + lst);
