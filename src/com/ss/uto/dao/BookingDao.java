@@ -43,9 +43,11 @@ public class BookingDao extends BaseDao<Booking> {
 	@Override
 	public List<Booking> extractData(ResultSet rs) throws ClassNotFoundException, SQLException {
 		List<Booking> bookings = new ArrayList<>();
+		
+		System.out.println("ID  Is_Active  Confirmation_Code");
 
 		while(rs.next()) {
-			System.out.println(rs.getString("id")+" "+rs.getInt("is_active")+ " " +rs.getString("confirmation_code"));
+			System.out.println(rs.getString("id")+"     "+rs.getInt("is_active")+ "          " +rs.getString("confirmation_code"));
 			Booking booking = new Booking();
 
 			booking.setBookingActive(rs.getInt("is_active"));

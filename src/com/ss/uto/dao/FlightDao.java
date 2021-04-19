@@ -63,10 +63,11 @@ public class FlightDao extends BaseDao<Flight> {
 		Route routeId = new Route();
 		Airplane airplaneId = new Airplane();
 
+		System.out.println("ID  Route_ID  Airplane_ID  Departure-Date/Time  Reserved_Seats  Seat Price");
 
 		while(rs.next()) {
-			System.out.println(rs.getInt("id") + " " + (rs.getString("route_id")+" "+rs.getString("airplane_id")
-			+" "+rs.getString("departure_time")+" "+rs.getString("reserved_seats")+" "+rs.getString("seat_price")));
+			System.out.println(rs.getInt("id") + "       " + (rs.getString("route_id")+"        "+rs.getString("airplane_id")
+			+"         "+rs.getString("departure_time")+"         "+rs.getString("reserved_seats")+"         "+rs.getString("seat_price")));
 
 			routeId.setId(5);
 			airplaneId.setId(2);

@@ -44,11 +44,15 @@ public class AirportDao extends BaseDao<Airport> {
 	@Override
 	public List<Airport> extractData(ResultSet rs) throws ClassNotFoundException, SQLException {
 		List<Airport> airports = new ArrayList<>();
-
+		
+		System.out.println("\n");
+		System.out.println("ID    City");
 
 		while(rs.next()) {
-
-			System.out.println(rs.getString("iata_id")+" "+rs.getString("city"));
+			
+		
+			
+			System.out.println(rs.getString("iata_id")+"   "+rs.getString("city"));
 
 			Airport airport = new Airport();
 			airport.setAirportCode(rs.getString("iata_id"));

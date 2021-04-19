@@ -124,16 +124,16 @@ public class MenuMain {
 
 						// IMPROVE THIS BY OUTPUTTING TABLE SIDE BY SIDE WHEN GET A CHANCE
 						System.out.println("Select which flight you want to manage " + "\n");
-						System.out.println("ID OrID OrCity ");
+						
 						es.getAllOriginFlightsWithCity(); // given in RouteDao
 						System.out.print("\n");
 
 						es.getAllDestFlightsWithCity(); // given in RouteDao
-						System.out.println("100 Quit to previous menu ");
+						
 
 
 
-						System.out.println("Select id from above list to manage...");
+						System.out.println("\n" + "Select id from above list to manage...");
 						String routeId = scan.nextLine();
 
 						System.out.println("Select option from below lists..." + "\n");
@@ -146,9 +146,8 @@ public class MenuMain {
 
 							if(option.charAt(0) == '1') {
 
-								System.out.println("Org Des DepDate    DepTime  FC BC EC" + "\n");
 								es.getAllFlightDetail(routeId);
-								System.out.println("Press 2 to return to previous menu");
+								System.out.println("\n" + "Press 2 to return to previous menu");
 
 								String input = scan.nextLine();
 
@@ -163,7 +162,7 @@ public class MenuMain {
 							if(option.charAt(0) == '2') {
 
 								System.out.println("You have choosen to update the below flight" + "\n");
-								System.out.println("Org Des DepDate    DepTime  FC BC EC");
+								
 								es.getAllFlightDetail(routeId);
 
 								System.out.println("\n" + "Enter 'quit' at any prompt to cancel operation");
@@ -219,8 +218,6 @@ public class MenuMain {
 								String seatClass = scan.nextLine();
 								if(seatClass.charAt(0) == '1') {
 									System.out.println("Exisiting number of seats: ");
-									System.out.println("\n");
-									System.out.println("ID First Class");
 									es.getSpecificSeat(routeId, "1");
 									System.out.println("\n");
 
@@ -240,7 +237,6 @@ public class MenuMain {
 								if(seatClass.charAt(0) == '2') {
 									System.out.println("Exisiting number of seats: ");
 									System.out.println("\n");
-									System.out.println("ID Business Class");
 									es.getSpecificSeat(routeId,"2");
 									System.out.println("\n");
 
@@ -260,7 +256,6 @@ public class MenuMain {
 								if(seatClass.charAt(0) == '3') {
 									System.out.println("Exisiting number of seats: ");
 									System.out.println("\n");
-									System.out.println("ID Economy Class");
 									es.getSpecificSeat(routeId, "3");
 									System.out.println("\n");
 
@@ -758,7 +753,7 @@ public class MenuMain {
 
 									System.out.println("Please select the booking id corrsponding your confirmation code you entered");
 
-									System.out.println("id act confirmCode");
+									
 									as.getAllBookings();
 									String bookId = scan.nextLine();
 
@@ -984,7 +979,7 @@ public class MenuMain {
 						if(userOperation.charAt(0) == '4') {
 
 							try {
-								System.out.println("id act confirm");
+						
 								as.getAllBookings();
 								return;
 							} catch (SQLException e) {
@@ -1418,12 +1413,10 @@ public class MenuMain {
 						if(passenInput.equals("1")) {
 							try {
 
-
-								System.out.println("Id Orid OrCty");
+						
 								es.getAllOriginFlightsWithCity(); // given in RouteDao
 								System.out.print("\n");	
 
-								System.out.println("id dsid dstCty");
 								es.getAllDestFlightsWithCity(); // given in RouteDao
 
 								System.out.println("\n");
@@ -1441,7 +1434,9 @@ public class MenuMain {
 									String seatType = scan.nextLine();
 
 									if(seatType.equals("1")) {
-										System.out.println("Org Des DepDate    DepTime  FC BC EC");
+										
+										System.out.println("\n");
+									
 										es.getAllFlightDetail(flightId);
 
 										travelerSubMenu();
@@ -1464,7 +1459,7 @@ public class MenuMain {
 										booking.setConfirmCode(confirmCode);
 										as.addBookings(booking);
 
-										System.out.println("id isAct ConfirmCode");
+									
 										as.getAllBookings();
 
 										System.out.println("Please select your booking id from above list based on your confirmation code you just entered");
@@ -1497,7 +1492,7 @@ public class MenuMain {
 										booking.setConfirmCode(confirmCode);
 										as.addBookings(booking);
 
-										System.out.println("id isAct ConfirmCode");
+						
 										as.getAllBookings();
 
 										System.out.println("Please select your booking id from above list based on your confirmation code you just entered");
@@ -1528,7 +1523,7 @@ public class MenuMain {
 										booking.setConfirmCode(confirmCode);
 										as.addBookings(booking);
 
-										System.out.println("id isAct ConfirmCode");
+						
 										as.getAllBookings();
 
 										System.out.println("Please select your booking id from above list based on your confirmation code you just entered");
@@ -1548,7 +1543,6 @@ public class MenuMain {
 									}
 									if(seatType.equals("5")) {
 										subBack = true;
-										System.out.println("Here");
 										travelerMainMenu();
 										backTwo = false;
 
@@ -1569,7 +1563,7 @@ public class MenuMain {
 
 							try {
 
-								System.out.println("id Act confirmationCode");
+								
 								as.getAllBookings();
 								System.out.println("\n");
 								System.out.println("Select the id corresponding your confirmation code to cancel your trip... ");

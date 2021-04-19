@@ -98,8 +98,9 @@ public abstract class BaseDao<T> {
 	public List<SeatAvailability> extractFirstClass(ResultSet rs) throws ClassNotFoundException, SQLException {
 		List<SeatAvailability> seatsAvail = new ArrayList<>();
 
+		System.out.println("ID  First_Class");
 		while(rs.next()) {
-			System.out.println(rs.getInt("id") + " " + (rs.getString("first_class")));
+			System.out.println(rs.getInt("id") + "     " + (rs.getString("first_class")));
 		}
 		return seatsAvail;
 	}
@@ -107,17 +108,20 @@ public abstract class BaseDao<T> {
 	public List<SeatAvailability> extractBusinessClass(ResultSet rs) throws ClassNotFoundException, SQLException {
 		List<SeatAvailability> seatsAvail = new ArrayList<>();
 
+		System.out.println("ID  Business_Class");
 		while(rs.next()) {
-			System.out.println(rs.getInt("id") + " " + (rs.getString("bussiness_class")));
+			System.out.println(rs.getInt("id") + "     " + (rs.getString("bussiness_class")));
 		}
 		return seatsAvail;
 	}
 
 	public List<SeatAvailability> extractEconomyClass(ResultSet rs) throws ClassNotFoundException, SQLException {
 		List<SeatAvailability> seatsAvail = new ArrayList<>();
+		
+		System.out.println("ID  Economy_Class");
 
 		while(rs.next()) {
-			System.out.println(rs.getInt("id") + " " + (rs.getString("economy_class")));
+			System.out.println(rs.getInt("id") + "     " + (rs.getString("economy_class")));
 		}
 		return seatsAvail;
 	}

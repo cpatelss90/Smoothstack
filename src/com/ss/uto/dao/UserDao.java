@@ -75,10 +75,13 @@ public class UserDao extends BaseDao<User> {
 		List<User> users = new ArrayList<>();
 
 		UserRole userRole = new UserRole();
+		
+		System.out.println("ID  Role_ID   Given_Name    Family_Name     UserName           Email                Password              PhoneNum");
+
 
 		while(rs.next()) {
-			System.out.println(rs.getInt("id") + " " + (rs.getString("role_id")+" "+rs.getString("given_name")
-			+" "+rs.getString("family_name")+" "+rs.getString("username")+" "+rs.getString("email") + " "+rs.getString("password") + " "+rs.getString("phone")));
+			System.out.println(rs.getInt("id") + "     " + (rs.getString("role_id")+"        "+rs.getString("given_name")
+			+"        "+rs.getString("family_name")+"          "+rs.getString("username")+"         "+rs.getString("email") + "    "+rs.getString("password") + "             "+rs.getString("phone")));
 
 			userRole.setId(2);
 			User user = new User();

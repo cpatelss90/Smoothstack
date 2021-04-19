@@ -80,9 +80,10 @@ public class RouteDao extends BaseDao<Route> {
 	public List<Route> extractData(ResultSet rs) throws ClassNotFoundException, SQLException {
 		List<Route> routes = new ArrayList<>();
 
+		System.out.println("ID  Origin  Destination");
 
 		while(rs.next()) {
-			System.out.println(rs.getInt("id") + " " + (rs.getString("origin_id")+" "+rs.getString("destination_id")));
+			System.out.println(rs.getInt("id") + "   " + (rs.getString("origin_id")+"     "+rs.getString("destination_id")));
 			Route route = new Route();
 			route.setId(rs.getInt("id"));
 			route.setOriginAirport(rs.getString("origin_id"));  // see if this works or check RouteDao
@@ -100,8 +101,9 @@ public class RouteDao extends BaseDao<Route> {
 		List<Route> routes = new ArrayList<>();
 
 
+		System.out.println("Origin  Destination   City");
 		while(rs.next()) {
-			System.out.println(rs.getString("origin_id")+" "+rs.getString("destination_id")+ " " +rs.getString("city"));
+			System.out.println(rs.getString("origin_id")+"    "+rs.getString("destination_id")+ "    " +rs.getString("city"));
 		}
 
 		return routes;
@@ -140,9 +142,10 @@ public class RouteDao extends BaseDao<Route> {
 	public List<Route> extractDataOriginFlightWithCity(ResultSet rs) throws ClassNotFoundException, SQLException {
 		List<Route> routes = new ArrayList<>();
 
+		System.out.println("ID  Origin  City");
 
 		while(rs.next()) {
-			System.out.println(rs.getString("id")+ " "+rs.getString("origin_id")+" "+rs.getString("city"));
+			System.out.println(rs.getString("id")+ "   "+rs.getString("origin_id")+"    "+rs.getString("city"));
 		}
 
 		return routes;
@@ -151,10 +154,11 @@ public class RouteDao extends BaseDao<Route> {
 	// for 1.1
 	public List<Route> extractDataDestFlightWithCity(ResultSet rs) throws ClassNotFoundException, SQLException {
 		List<Route> routes = new ArrayList<>();
-
+		
+		System.out.println("ID  Destination   City");
 
 		while(rs.next()) {
-			System.out.println(rs.getString("id")+ " "+rs.getString("destination_id")+ " " +rs.getString("city"));
+			System.out.println(rs.getString("id")+ "    "+rs.getString("destination_id")+ "          " +rs.getString("city"));
 		}
 
 		return routes;
@@ -164,10 +168,13 @@ public class RouteDao extends BaseDao<Route> {
 	// for 1.1.1
 	public List<Route> extractFlightDetails(ResultSet rs) throws ClassNotFoundException, SQLException {
 		List<Route> routes = new ArrayList<>();
-
-
+		
+		System.out.print("Origin   Destination        Departure              First_Class     Business_Class     Economy_CLass");
+		System.out.println("\n");
 		while(rs.next()) {
-			System.out.println(rs.getString("origin_id")+ " "+rs.getString("destination_id")+ " " +rs.getString("departure_time")+ " "+rs.getString("first_class")+ " "+rs.getString("bussiness_class")+ " "+rs.getString("economy_class"));
+			
+			System.out.println(rs.getString("origin_id")+ "        "+rs.getString("destination_id")+ "          " +rs.getString("departure_time")+ "            "+rs.getString("first_class")+ "                "+rs.getString("bussiness_class")+ "                  "+rs.getString("economy_class"));
+			
 		}
 
 		return routes;

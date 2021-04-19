@@ -47,7 +47,7 @@ public class AirplaneDao extends BaseDao<Airplane> {
 
 		while (rs.next()) {
 
-			System.out.println(rs.getInt("id")+" "+rs.getInt("type_id"));
+			System.out.println(rs.getInt("id")+"  "+rs.getInt("type_id"));
 
 			airplaneType.setId(2);
 

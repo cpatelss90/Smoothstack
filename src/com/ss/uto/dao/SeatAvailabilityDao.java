@@ -79,16 +79,19 @@ public class SeatAvailabilityDao extends BaseDao<SeatAvailability> {
 		return read("select * from seats_availibility"); 
 	}
 
+	
 
 	@Override
 	public List<SeatAvailability> extractData(ResultSet rs) throws ClassNotFoundException, SQLException {
 		List<SeatAvailability> seatsAvail = new ArrayList<>();
 		Flight flight = new Flight();
+		
+		System.out.println("ID  Flight_ID  First_Class  Business_Classs  Economy_Class");
 
 		while(rs.next()) {
-			System.out.println(rs.getInt("id") + " " + rs.getString("flight_id")+ " " + rs.getString("first_class")
-			+ rs.getString("bussiness_class")
-			+ rs.getString("economy_class"));
+			System.out.println(rs.getInt("id") + "      " + rs.getString("flight_id")+ "         " + rs.getString("first_class")
+			+ "             " + rs.getString("bussiness_class")
+			+ "               " + rs.getString("economy_class"));
 
 			flight.setId(3);
 

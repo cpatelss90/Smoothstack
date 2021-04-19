@@ -49,9 +49,11 @@ public class PassengerDao extends BaseDao<Passenger>{
 		List<Passenger> passengers = new ArrayList<>();
 		Booking booking = new Booking();
 
+		System.out.println("ID  Bookng_ID   Given_Name    Family_Name     Birth_Day    Gender         Address");
+		
 		while(rs.next()) {
-			System.out.println(rs.getInt("id") + " " + (rs.getString("booking_id")+" "+rs.getString("given_name")
-			+" "+rs.getString("family_name")+" "+rs.getString("dob")+" "+rs.getString("gender") + " "+rs.getString("address")));
+			System.out.println(rs.getInt("id") + "    " + (rs.getString("booking_id")+"           "+rs.getString("given_name")
+			+"            "+rs.getString("family_name")+"     "+rs.getString("dob")+"     "+rs.getString("gender") + "        "+rs.getString("address")));
 			booking.setId(5);
 
 			Passenger passenger = new Passenger();

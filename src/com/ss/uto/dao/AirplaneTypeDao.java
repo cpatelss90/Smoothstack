@@ -45,9 +45,12 @@ public class AirplaneTypeDao extends BaseDao<AirplaneType>{
 		List<AirplaneType> airplaneTypes = new ArrayList<>();
 
 
-
+		System.out.println("ID   Max_Capacity");
+	
 		while(rs.next()) {
-			System.out.println(rs.getInt("id") + " " + (rs.getString("max_capacity")));
+			
+			System.out.println(rs.getString("id") + "     " + rs.getInt("max_capacity"));
+			
 			AirplaneType airplaneType = new AirplaneType();
 			airplaneType.setId(rs.getInt("id"));
 			airplaneType.getMaxCapacity();  // see if this works or check RouteDao
