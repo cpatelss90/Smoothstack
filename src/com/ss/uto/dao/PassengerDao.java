@@ -12,7 +12,7 @@ import com.ss.uto.entity.Booking;
 import com.ss.uto.entity.Passenger;
 
 /**
- * @author charvin
+ * @author charvin patel
  *
  */
 public class PassengerDao extends BaseDao<Passenger>{

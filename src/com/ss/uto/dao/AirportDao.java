@@ -12,7 +12,7 @@ import com.ss.uto.entity.Airport;
 
 
 /**
- * @author charvin
+ * @author charvin patel
  *
  */
 public class AirportDao extends BaseDao<Airport> {

@@ -12,7 +12,7 @@ import com.ss.uto.entity.Flight;
 import com.ss.uto.entity.SeatAvailability;
 
 /**
- * @author charvin
+ * @author charvin patel
  *
  */
 public class SeatAvailabilityDao extends BaseDao<SeatAvailability> {

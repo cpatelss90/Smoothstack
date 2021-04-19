@@ -9,7 +9,7 @@ import com.ss.uto.dao.TicketDao;
 import com.ss.uto.entity.Ticket;
 
 /**
- * @author charvin
+ * @author charvin patel
  *
  */
 public class TravelerService {

@@ -12,7 +12,7 @@ import java.util.List;
 import com.ss.uto.entity.Booking;
 import com.ss.uto.entity.BookingGuest;
 /**
- * @author charvin
+ * @author charvin patel
  *
  */
 public class BookingGuestDao extends BaseDao<BookingGuest> {

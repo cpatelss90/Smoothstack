@@ -6,14 +6,12 @@ package com.ss.uto.entity;
 import java.io.Serializable;
 
 /**
- * @author charvin
+ * @author charvin patel
  *
  */
 public class User implements Serializable{
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -570343081673030488L;
 	private Integer id;
 	private UserRole roleId = new UserRole();

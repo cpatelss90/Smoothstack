@@ -6,14 +6,11 @@ package com.ss.uto.entity;
 import java.io.Serializable;
 
 /**
- * @author charvin
+ * @author charvin patel
  *
  */
 public class BookingGuest implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -6689361154739008233L;
 	private Booking bookingId = new Booking();
 	private String email;

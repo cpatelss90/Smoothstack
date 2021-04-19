@@ -7,7 +7,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- * @author charvin
+ * @author charvin patel
  *
  */
 public class ConnectionUtil {

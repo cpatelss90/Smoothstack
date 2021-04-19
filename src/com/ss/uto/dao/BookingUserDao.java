@@ -13,7 +13,7 @@ import com.ss.uto.entity.BookingUser;
 import com.ss.uto.entity.User;
 
 /**
- * @author charvin
+ * @author charvin patel
  *
  */
 public class BookingUserDao extends BaseDao<BookingUser> {

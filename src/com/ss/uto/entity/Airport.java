@@ -4,16 +4,13 @@
 package com.ss.uto.entity;
 
 import java.io.Serializable;
-
 /**
- * @author charvin
+ * @author charvin patel
  *
  */
 public class Airport implements Serializable{
 	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -7157227957057164464L;
 	
 	private String airportCode;

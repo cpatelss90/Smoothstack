@@ -12,7 +12,7 @@ import com.ss.uto.entity.User;
 import com.ss.uto.entity.UserRole;
 
 /**
- * @author charvin
+ * @author charvin patel
  *
  */
 public class UserDao extends BaseDao<User> {

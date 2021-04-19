@@ -13,7 +13,7 @@ import com.ss.uto.entity.Flight;
 import com.ss.uto.entity.Ticket;
 
 /**
- * @author charvin
+ * @author charvin patel
  *
  */
 public class TicketDao extends BaseDao<Ticket> {

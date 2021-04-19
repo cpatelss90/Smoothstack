@@ -2,11 +2,14 @@ package com.ss.uto.entity;
 
 import java.io.Serializable;
 
+/**
+ * @author charvin patel
+ *
+ */
+
 public class AirplaneType implements Serializable {
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 2051318208399892900L;
 	private Integer id;
 	private Integer maxCapacity;

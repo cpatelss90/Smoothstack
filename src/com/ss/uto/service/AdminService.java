@@ -30,7 +30,7 @@ import com.ss.uto.entity.SeatAvailability;
 import com.ss.uto.entity.User;
 
 /**
- * @author charvin
+ * @author charvin patel
  *
  */
 public class AdminService {

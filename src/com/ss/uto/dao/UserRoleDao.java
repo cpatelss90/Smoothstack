@@ -11,7 +11,7 @@ import java.util.List;
 import com.ss.uto.entity.UserRole;
 
 /**
- * @author charvin
+ * @author charvin patel
  *
  */
 public class UserRoleDao extends BaseDao<UserRole> {

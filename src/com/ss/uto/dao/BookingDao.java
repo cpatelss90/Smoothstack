@@ -11,7 +11,7 @@ import java.util.List;
 import com.ss.uto.entity.Booking;
 
 /**
- * @author charvin
+ * @author charvin patel
  *
  */
 public class BookingDao extends BaseDao<Booking> {

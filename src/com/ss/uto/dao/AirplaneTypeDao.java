@@ -3,15 +3,16 @@
  */
 package com.ss.uto.dao;
 
+
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import com.ss.uto.entity.AirplaneType;
-
 /**
- * @author charvin
+ * @author charvin patel
  *
  */
 public class AirplaneTypeDao extends BaseDao<AirplaneType>{

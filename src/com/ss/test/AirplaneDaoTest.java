@@ -11,6 +11,7 @@ import com.ss.uto.entity.Airplane;
 import com.ss.uto.entity.AirplaneType;
 import com.ss.uto.service.ConnectionUtil;
 
+//Test
 public class AirplaneDaoTest {
 
 

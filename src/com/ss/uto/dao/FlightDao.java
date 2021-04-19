@@ -15,7 +15,7 @@ import com.ss.uto.entity.Route;
 
 
 /**
- * @author charvin
+ * @author charvin patel
  *
  */
 public class FlightDao extends BaseDao<Flight> {
