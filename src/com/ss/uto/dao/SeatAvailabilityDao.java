@@ -72,6 +72,28 @@ public class SeatAvailabilityDao extends BaseDao<SeatAvailability> {
 		}
 
 	}
+	
+	
+	public String getSpecificSeatWithClass(String seatsId, String input) throws ClassNotFoundException, SQLException {
+
+		if(input.equals("1")){
+			return readFirst("select seats_availibility.id,first_class from seats_availibility, flight where seats_availibility.id = ? AND flight.id = ?", new Object[] {seatsId,input});
+		}
+		else if(input.equals("2")) {
+			return readBusiness("select seats_availibility.id,bussiness_class from seats_availibility, flight where seats_availibility.id = ? AND flight.id = ?", new Object[] {seatsId,input});
+		}
+
+		else if(input.equals("3")) {
+			return readEconomy("select seats_availibility.id,economy_class from seats_availibility, flight where seats_availibility.id = ? AND flight.id = ?", new Object[] {seatsId,input});
+		}
+		else {
+			//return read("select * from seats_availibility");
+			return "";
+
+		}
+		
+
+	}
 
 
 	public List<SeatAvailability> getAllSeats() throws ClassNotFoundException, SQLException {
@@ -83,6 +105,34 @@ public class SeatAvailabilityDao extends BaseDao<SeatAvailability> {
 
 	@Override
 	public List<SeatAvailability> extractData(ResultSet rs) throws ClassNotFoundException, SQLException {
+		List<SeatAvailability> seatsAvail = new ArrayList<>();
+		Flight flight = new Flight();
+		
+		System.out.println("ID  Flight_ID  First_Class  Business_Classs  Economy_Class");
+
+		while(rs.next()) {
+			System.out.println(rs.getInt("id") + "      " + rs.getString("flight_id")+ "         " + rs.getString("first_class")
+			+ "             " + rs.getString("bussiness_class")
+			+ "               " + rs.getString("economy_class"));
+
+			flight.setId(3);
+
+
+			SeatAvailability seat = new SeatAvailability();
+
+			seat.setFlightId(flight);
+			seat.setFirstClass(rs.getInt("first_class"));
+			seat.setBusinessClass(rs.getInt("bussiness_class"));
+			seat.setEconomyClass(rs.getInt("economy_class"));
+			seatsAvail.add(seat);
+
+
+		}
+		return seatsAvail;
+	}
+	
+	
+	public List<SeatAvailability> extractSpecificSeat(ResultSet rs) throws ClassNotFoundException, SQLException {
 		List<SeatAvailability> seatsAvail = new ArrayList<>();
 		Flight flight = new Flight();
 		

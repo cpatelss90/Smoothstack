@@ -39,6 +39,11 @@ public class AirplaneTypeDao extends BaseDao<AirplaneType>{
 		return read("select * from airplane_type");
 
 	}
+	
+	public Integer getAllAirplaneTypeById(String id) throws ClassNotFoundException, SQLException {
+		return readByIdType("select * from airplane_type where id = ?", new Object[] {id});
+
+	}
 
 	@Override
 	public List<AirplaneType> extractData(ResultSet rs) throws ClassNotFoundException, SQLException {
@@ -59,6 +64,28 @@ public class AirplaneTypeDao extends BaseDao<AirplaneType>{
 
 		return airplaneTypes;
 	}
+	
+	
+	/*public Integer extractDataByTypeId(ResultSet rs) throws ClassNotFoundException, SQLException {
+		//List<AirplaneType> airplaneTypes = new ArrayList<>();
+		Integer cap = 0;
+
+
+		System.out.println("ID   Max_Capacity");
+	
+		while(rs.next()) {
+			
+			System.out.println(rs.getString("id") + "     " + rs.getInt("max_capacity"));
+			cap = rs.getInt("max_capacity");
+			
+			/*AirplaneType airplaneType = new AirplaneType();
+			airplaneType.setId(rs.getInt("id"));
+			airplaneType.getMaxCapacity();  // see if this works or check RouteDao
+			airplaneTypes.add(airplaneType);*/
+		//}
+
+		//return cap;
+	//}*/
 
 	// for 1.1
 	@Override

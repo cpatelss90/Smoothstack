@@ -6,6 +6,7 @@ package com.ss.uto.menu;
 import java.sql.SQLException;
 import java.util.Scanner;
 import com.ss.uto.entity.Airplane;
+import com.ss.uto.entity.AirplaneType;
 import com.ss.uto.entity.Airport;
 import com.ss.uto.entity.Booking;
 import com.ss.uto.entity.BookingAgent;
@@ -31,6 +32,7 @@ public class MenuMain {
 	static Flight flight = new Flight();
 	static Route route = new Route();
 	static Airplane airplane = new Airplane();
+	static AirplaneType airplaneType = new AirplaneType();
 	static Booking booking = new Booking();
 	static Passenger passenger = new Passenger();
 	static UserRole userRole = new UserRole();
@@ -321,8 +323,7 @@ public class MenuMain {
 
 
 			String subMenu = scan.nextLine();
-			//boolean back = false;
-			//do {
+			
 			// 1) Add/Update/Delete/Read Flights
 			if(subMenu.charAt(0) == '1') {
 
@@ -534,14 +535,51 @@ public class MenuMain {
 								String selectFlightId = scan.nextLine();
 
 								System.out.println("Please enter how many First Class seats you want to add...");
+								
 								String totalSeats = scan.nextLine();
+								
+								System.out.println("\n");	
+								System.out.println("Please wait, system processing...");
+								
 								flight.setId(Integer.parseInt(selectFlightId));
+								seatAvail.setFlightId(flight);
+								
+								
+								String typeId = as.getAirplaneById(selectFlightId);
+								airplaneType.setId(Integer.parseInt(typeId));
+								
+								Integer cap = as.getAirplaneTypeById(typeId);
+								
+								
+								String firstClassSeats = es.getSpecificSeatByClass(selectSeatId, "1");
+								seatAvail.setFirstClass(Integer.parseInt(firstClassSeats));
+								
+								String businessClassSeats = es.getSpecificSeatByClass(selectSeatId, "2");
+								seatAvail.setBusinessClass(Integer.parseInt(businessClassSeats));
+								
+								String economyClassSeats = es.getSpecificSeatByClass(selectSeatId, "3");
+								seatAvail.setEconomyClass(Integer.parseInt(economyClassSeats));
+								
+								if((Integer.parseInt(totalSeats) + seatAvail.getBusinessClass() + seatAvail.getEconomyClass()) <= cap) {
+									flight.setId(Integer.parseInt(selectFlightId));
+									seatAvail.setFlightId(flight);
+									seatAvail.setFirstClass(Integer.parseInt(totalSeats));
+									es.updateSeats("1", seatAvail);
+
+									System.out.println("Seats successfully added!");
+									back = true;
+								}
+								
+								else {
+									System.out.println("Sorry, you are adding more than capacity!" + "\n");
+								}
+							/*	flight.setId(Integer.parseInt(selectFlightId));
 								seatAvail.setFlightId(flight);
 								seatAvail.setFirstClass(Integer.parseInt(totalSeats));
 								es.updateSeats("1", seatAvail);
 
 								System.out.println("Seats successfully added!");
-								back = true;
+								back = true;*/
 
 							}
 
@@ -562,13 +600,39 @@ public class MenuMain {
 
 								System.out.println("Please enter how many Business Class seats you want to add...");
 								String totalSeats = scan.nextLine();
-								flight.setId(Integer.parseInt(selectFlightId));
-								seatAvail.setFlightId(flight);
-								seatAvail.setBusinessClass(Integer.parseInt(totalSeats));
-								es.updateSeats("2", seatAvail);
+								
+								System.out.println("\n");	
+								System.out.println("Please wait, system processing...");
+									
+								String typeId = as.getAirplaneById(selectFlightId);
+								airplaneType.setId(Integer.parseInt(typeId));
+								
+								Integer cap = as.getAirplaneTypeById(typeId);
+								
+								String firstClassSeats = es.getSpecificSeatByClass(selectSeatId, "1");
+								seatAvail.setFirstClass(Integer.parseInt(firstClassSeats));
+								
+								String businessClassSeats = es.getSpecificSeatByClass(selectSeatId, "2");
+								seatAvail.setBusinessClass(Integer.parseInt(businessClassSeats));
+								
+								String economyClassSeats = es.getSpecificSeatByClass(selectSeatId, "3");
+								seatAvail.setEconomyClass(Integer.parseInt(economyClassSeats));
+								
+								if((Integer.parseInt(totalSeats) + seatAvail.getFirstClass() + seatAvail.getEconomyClass()) <= cap) {
+									flight.setId(Integer.parseInt(selectFlightId));
+									seatAvail.setFlightId(flight);
+									seatAvail.setBusinessClass(Integer.parseInt(totalSeats));
+									es.updateSeats("2", seatAvail);
 
-								System.out.println("Seats successfully added!");
-								back = true;
+									System.out.println("Seats successfully added!");
+									back = true;
+								}
+								
+								else {
+									System.out.println("Sorry, you are adding more than capacity!" + "\n");
+								}
+								
+							
 
 							}
 
@@ -588,13 +652,38 @@ public class MenuMain {
 
 								System.out.println("Please enter how many Economy Class seats you want to add...");
 								String totalSeats = scan.nextLine();
-								flight.setId(Integer.parseInt(selectFlightId));
-								seatAvail.setFlightId(flight);
-								seatAvail.setEconomyClass(Integer.parseInt(totalSeats));
-								es.updateSeats("3", seatAvail);
+								
+								System.out.println("\n");	
+								System.out.println("Please wait, system processing...");
+									
+								String typeId = as.getAirplaneById(selectFlightId);
+								airplaneType.setId(Integer.parseInt(typeId));
+								
+								Integer cap = as.getAirplaneTypeById(typeId);
+								
+								String firstClassSeats = es.getSpecificSeatByClass(selectSeatId, "1");
+								seatAvail.setFirstClass(Integer.parseInt(firstClassSeats));
+								
+								String businessClassSeats = es.getSpecificSeatByClass(selectSeatId, "2");
+								seatAvail.setBusinessClass(Integer.parseInt(businessClassSeats));
+								
+								String economyClassSeats = es.getSpecificSeatByClass(selectSeatId, "3");
+								seatAvail.setEconomyClass(Integer.parseInt(economyClassSeats));
+								
+								if((Integer.parseInt(totalSeats) + seatAvail.getFirstClass() + seatAvail.getBusinessClass()) <= cap) {
+									flight.setId(Integer.parseInt(selectFlightId));
+									seatAvail.setFlightId(flight);
+									seatAvail.setEconomyClass(Integer.parseInt(totalSeats));
+									es.updateSeats("3", seatAvail);
 
-								System.out.println("Seats successfully added!");
-								back = true;
+									System.out.println("Seats successfully added!");
+									back = true;
+								}
+								
+								else {
+									System.out.println("Sorry, you are adding more than capacity!" + "\n");
+								}
+
 
 							}
 

@@ -46,6 +46,13 @@ public class FlightDao extends BaseDao<Flight> {
 		return read("select * from flight");
 
 	}
+	
+	
+	public String getAirplaneIdByFlightId(String flightId) throws ClassNotFoundException, SQLException {
+
+		return readByIdFlight("select airplane_id from flight where id = ?", new Object[] {flightId} );
+
+	}
 
 
 	// for 1.2

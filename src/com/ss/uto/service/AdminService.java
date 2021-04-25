@@ -19,6 +19,7 @@ import com.ss.uto.dao.TicketDao;
 import com.ss.uto.dao.UserDao;
 import com.ss.uto.dao.UserRoleDao;
 import com.ss.uto.entity.Airplane;
+import com.ss.uto.entity.AirplaneType;
 import com.ss.uto.entity.Airport;
 import com.ss.uto.entity.Booking;
 import com.ss.uto.entity.BookingAgent;
@@ -226,6 +227,7 @@ public class AdminService {
 			conn.close();
 		}
 	}
+	
 
 	//----------------------------------------------------------------------------------------------------	
 	// Booking/Tickets Management
@@ -584,6 +586,42 @@ public class AdminService {
 		}finally {
 			conn.close();
 		}
+	}
+	
+	public String getAirplaneById(String flightId) throws SQLException {
+		Connection conn = null;
+		String airplaneIdd = "";
+		try {
+			conn = connUtil.getConnection();
+			AirplaneDao airplaneDao = new AirplaneDao(conn);
+			airplaneIdd = airplaneDao.getAllAirplaneById(flightId);
+			conn.commit();
+
+		}catch (Exception e){
+			e.printStackTrace();
+			conn.rollback();
+		}finally {
+			conn.close();
+		}
+		return airplaneIdd;
+	}
+	
+	public Integer getAirplaneTypeById(String airplaneTypeId) throws SQLException {
+		Connection conn = null;
+		Integer airplaneIdd = 0;
+		try {
+			conn = connUtil.getConnection();
+			AirplaneTypeDao airplaneTypeDao = new AirplaneTypeDao(conn);
+			airplaneIdd = airplaneTypeDao.getAllAirplaneTypeById(airplaneTypeId);
+			conn.commit();
+
+		}catch (Exception e){
+			e.printStackTrace();
+			conn.rollback();
+		}finally {
+			conn.close();
+		}
+		return airplaneIdd;
 	}
 
 

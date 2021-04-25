@@ -121,6 +121,24 @@ public class EmployeeService {
 			conn.close();
 		}
 	}
+	
+	public String getSpecificSeatByClass(String seatId, String input) throws SQLException {
+		Connection conn = null;
+		String seats = "";
+		try {
+			conn = connUtil.getConnection();
+			SeatAvailabilityDao seatDao = new SeatAvailabilityDao(conn);
+			seats = seatDao.getSpecificSeatWithClass(seatId, input);
+			conn.commit();
+
+		}catch (Exception e){
+			e.printStackTrace();
+			conn.rollback();
+		}finally {
+			conn.close();
+		}
+		return seats;
+	}
 
 
 	public void getAllSeat() throws SQLException {
