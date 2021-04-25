@@ -52,12 +52,13 @@ public class MenuMain {
 		System.out.println("Please choose your role");
 		System.out.println("1) Employee " + "\n" +
 				"2) Administrator " + "\n" + 
-				"3) Travelor");
+				"3) Travelor" + "\n" +
+				"4) Quit the Application");
 
 		String identityCode = scan.nextLine();
 
 		if(identityCode.charAt(0) == '1'){
-			subMenu();
+			EmployeMenu();
 		}
 
 		if(identityCode.charAt(0) == '2'){
@@ -66,20 +67,19 @@ public class MenuMain {
 		if(identityCode.charAt(0) == '3'){
 			travelorMenu();
 		}
+		if(identityCode.charAt(0) == '4'){
+			return;
+		}
 
 
 	}
 
 
 
+	//-----------------------------------------------------------------------------------------------------------------------------------------------------
+	// Employee Menu
 
-
-
-
-
-
-
-	public static void subMenu() {
+	public static void EmployeMenu() {
 		boolean empBack = false;
 
 		do{
@@ -87,2122 +87,439 @@ public class MenuMain {
 					"2) Quit to previous");
 			String employeeInput = scan.nextLine();
 
-			
-			if(employeeInput.charAt(0) == '1') {
 
+			if(employeeInput.charAt(0) == '1') {
 
 				try {
 
 
-					// IMPROVE THIS BY OUTPUTTING TABLE SIDE BY SIDE WHEN GET A CHANCE
 					System.out.println("Select which flight you want to manage " + "\n");
 
-					es.getAllOriginFlightsWithCity(); // given in RouteDao
+					es.getAllOriginFlightsWithCity(); 
 					System.out.print("\n");
 
-					es.getAllDestFlightsWithCity(); // given in RouteDao
-
-
-
+					es.getAllDestFlightsWithCity();
 
 					System.out.println("\n" + "Select id from above list to manage...");
 					String routeId = scan.nextLine();
 
 					System.out.println("Select option from below lists..." + "\n");
 
-					subMenuTwo(routeId);
-
-					//boolean empBack = false;
-					//do{
-				/*	String option = scan.nextLine();
-
-					if(option.charAt(0) == '1') {
-
-						es.getAllFlightDetail(routeId);
-						System.out.println("\n" + "Press 2 to return to previous menu");
-
-						String input = scan.nextLine();
-
-						if(input.equals("2")) {
-							subMenuTwo();
-							empBack = true;
-						}
-
-					}
-
-
-					if(option.charAt(0) == '2') {
-
-						System.out.println("You have choosen to update the below flight" + "\n");
-
-						es.getAllFlightDetail(routeId);
-
-						System.out.println("\n" + "Enter 'quit' at any prompt to cancel operation");
-
-
-						System.out.println("\n");
-						System.out.println("Please enter new 3 letter Origin airport code or N/A for no change)");
-						String originCode = scan.nextLine();
-
-						System.out.println("Please enter new 3 letter Destination airport code or N/A for no change)");
-						String destCode = scan.nextLine();
-
-						System.out.println("Please enter new departure date and time(YYYY-MM-DD HH:MM:SS) or N/A for no change");
-						String departureDateTime = scan.nextLine();
-
-
-						if(originCode.equals("quit") || destCode.equals("quit") || departureDateTime.equals("quit")) {
-							//scan.close();
-							return;
-						}
-
-
-
-						route.setId(Integer.parseInt(routeId));
-						flight.setRouteId(route);
-						flight.setId(Integer.parseInt(routeId));
-
-
-						if(!(departureDateTime.equals("N/A"))) {
-							flight.setDepartTime(departureDateTime);
-							as.updateSpecificFlights(flight);
-						}
-
-
-						route.setOriginAirport(originCode);
-
-						route.setDesAirport(destCode);
-
-						if(!(originCode.equals("N/A") && destCode.equals("N/A"))) {
-							es.updateRoute(route,originCode,destCode);
-						}
-
-						System.out.println("Information Successfully Updated!");
-
-						subMenuTwo();
-						empBack = true;
-					}
-
-					if(option.charAt(0) == '3') {
-
-						subMenuThree();
-
-						String seatClass = scan.nextLine();
-						if(seatClass.charAt(0) == '1') {
-							System.out.println("Exisiting number of seats: ");
-							es.getSpecificSeat(routeId, "1");
-							System.out.println("\n");
-
-
-							System.out.println("Enter a new number of seats: ");
-							String seats = scan.nextLine();
-							seatAvail.setId(Integer.parseInt(routeId));
-							flight.setId(Integer.parseInt(routeId));
-							seatAvail.setFlightId(flight);
-							seatAvail.setFirstClass(Integer.parseInt(seats));
-							es.updateSeats("1",seatAvail);
-
-							System.out.println("Seats updated!");
-							return;
-						}
-
-						if(seatClass.charAt(0) == '2') {
-							System.out.println("Exisiting number of seats: ");
-							System.out.println("\n");
-							es.getSpecificSeat(routeId,"2");
-							System.out.println("\n");
-
-
-							System.out.println("Enter a new number of seats: ");
-							String seats = scan.nextLine();
-							seatAvail.setId(Integer.parseInt(routeId));
-							flight.setId(Integer.parseInt(routeId));
-							seatAvail.setFlightId(flight);
-							seatAvail.setBusinessClass(Integer.parseInt(seats));
-							es.updateSeats("2",seatAvail);
-
-							System.out.println("Seats updated!");
-							return;
-						}
-
-						if(seatClass.charAt(0) == '3') {
-							System.out.println("Exisiting number of seats: ");
-							System.out.println("\n");
-							es.getSpecificSeat(routeId, "3");
-							System.out.println("\n");
-
-							System.out.println("Enter a new number of seats: ");
-							String seats = scan.nextLine();
-							seatAvail.setId(Integer.parseInt(routeId));
-							flight.setId(Integer.parseInt(routeId));
-							seatAvail.setFlightId(flight);
-							seatAvail.setEconomyClass(Integer.parseInt(seats));
-							es.updateSeats("3",seatAvail);
-
-							System.out.println("Seats updated!");
-							return;
-						}
-
-						if(seatClass.charAt(0) == '4') {
-
-							subMenuTwo();
-							empBack = true;
-						}
-					}
-
-					if(option.charAt(0) == '4') {
-						
-						System.out.println("1) Enter Flights to Manage " + "\n" +
-								"2) Quit to previous");
-						employeeInput = scan.nextLine();
-
-						//return;
-						empBack = true;
-					}*/
-					//}while(empBack);
+					EmpSubMenu(routeId);
 
 
 				} catch (SQLException e) {
 					System.out.println("Exception: " + e);
 				}
 			}
-				
 
 			if(employeeInput.charAt(0) == '2') {
 
-				//mainBack = true;
 				mainMenu();
 			}
 		}while(empBack);
 
-
-
 	}
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-	public static void subMenuTwo(String routeId) {
+	// Employee Sub-Menu
+	public static void EmpSubMenu(String routeId) {
 		boolean empBack = false;
-		
+
 		try {
-		
-		do{
-			System.out.println("1) View More details about the flight " + "\n" +
-		
+
+			do{
+				System.out.println("1) View More details about the flight " + "\n" +
+
 				"2) Update the details about the flight " + "\n" + 
 				"3) Add Seats to flight" + "\n" + 
-				"4) Quit the application");
-		
-		
-		
-		String option = scan.nextLine();
-
-		if(option.charAt(0) == '1') {
-
-			es.getAllFlightDetail(routeId);
-			System.out.println("\n" + "Press 2 to return to previous menu");
-
-			String input = scan.nextLine();
-
-			if(input.equals("2")) {
-				//subMenuTwo();
-				empBack = true;
-			}
-
-		}
-
-
-		if(option.charAt(0) == '2') {
-
-			System.out.println("You have choosen to update the below flight" + "\n");
-
-			es.getAllFlightDetail(routeId);
-
-			System.out.println("\n" + "Enter 'quit' at any prompt to cancel operation");
-
-
-			System.out.println("\n");
-			System.out.println("Please enter new 3 letter Origin airport code or N/A for no change)");
-			String originCode = scan.nextLine();
-
-			System.out.println("Please enter new 3 letter Destination airport code or N/A for no change)");
-			String destCode = scan.nextLine();
-
-			System.out.println("Please enter new departure date and time(YYYY-MM-DD HH:MM:SS) or N/A for no change");
-			String departureDateTime = scan.nextLine();
-
-
-			if(originCode.equals("quit") || destCode.equals("quit") || departureDateTime.equals("quit")) {
-				//scan.close();
-				return;
-			}
+						"4) Quit to previous");
 
 
 
-			route.setId(Integer.parseInt(routeId));
-			flight.setRouteId(route);
-			flight.setId(Integer.parseInt(routeId));
+				String option = scan.nextLine();
+
+				// 1) View More details about the Flight
+				if(option.charAt(0) == '1') {
+
+					es.getAllFlightDetail(routeId);
+					System.out.println("\n" + "Press 2 to return to previous menu");
+
+					String input = scan.nextLine();
+
+					if(input.equals("2")) {
+
+						empBack = true;
+					}
+
+				}
 
 
-			if(!(departureDateTime.equals("N/A"))) {
-				flight.setDepartTime(departureDateTime);
-				as.updateSpecificFlights(flight);
-			}
+				// 2) Update the details about the Flight
+				if(option.charAt(0) == '2') {
+
+					System.out.println("You have choosen to update the below flight" + "\n");
+
+					es.getAllFlightDetail(routeId);
+
+					System.out.println("\n" + "Enter 'quit' at any prompt to cancel operation");
 
 
-			route.setOriginAirport(originCode);
+					System.out.println("\n");
+					System.out.println("Please enter new 3 letter Origin airport code or N/A for no change)");
+					String originCode = scan.nextLine();
 
-			route.setDesAirport(destCode);
+					System.out.println("Please enter new 3 letter Destination airport code or N/A for no change)");
+					String destCode = scan.nextLine();
 
-			if(!(originCode.equals("N/A") && destCode.equals("N/A"))) {
-				es.updateRoute(route,originCode,destCode);
-			}
-
-			System.out.println("Information Successfully Updated!");
-
-			//subMenuTwo();
-			empBack = true;
-		}
-
-		if(option.charAt(0) == '3') {
-
-			subMenuThree();
-
-			String seatClass = scan.nextLine();
-			if(seatClass.charAt(0) == '1') {
-				System.out.println("Exisiting number of seats: ");
-				es.getSpecificSeat(routeId, "1");
-				System.out.println("\n");
+					System.out.println("Please enter new departure date and time(YYYY-MM-DD HH:MM:SS) or N/A for no change");
+					String departureDateTime = scan.nextLine();
 
 
-				System.out.println("Enter a new number of seats: ");
-				String seats = scan.nextLine();
-				seatAvail.setId(Integer.parseInt(routeId));
-				flight.setId(Integer.parseInt(routeId));
-				seatAvail.setFlightId(flight);
-				seatAvail.setFirstClass(Integer.parseInt(seats));
-				es.updateSeats("1",seatAvail);
-
-				System.out.println("Seats updated!");
-				//return;
-			}
-
-			if(seatClass.charAt(0) == '2') {
-				System.out.println("Exisiting number of seats: ");
-				System.out.println("\n");
-				es.getSpecificSeat(routeId,"2");
-				System.out.println("\n");
+					if(originCode.equals("quit") || destCode.equals("quit") || departureDateTime.equals("quit")) {
+						empBack = true;
+					}
 
 
-				System.out.println("Enter a new number of seats: ");
-				String seats = scan.nextLine();
-				seatAvail.setId(Integer.parseInt(routeId));
-				flight.setId(Integer.parseInt(routeId));
-				seatAvail.setFlightId(flight);
-				seatAvail.setBusinessClass(Integer.parseInt(seats));
-				es.updateSeats("2",seatAvail);
 
-				System.out.println("Seats updated!");
-				return;
-			}
+					route.setId(Integer.parseInt(routeId));
+					flight.setRouteId(route);
+					flight.setId(Integer.parseInt(routeId));
 
-			if(seatClass.charAt(0) == '3') {
-				System.out.println("Exisiting number of seats: ");
-				System.out.println("\n");
-				es.getSpecificSeat(routeId, "3");
-				System.out.println("\n");
 
-				System.out.println("Enter a new number of seats: ");
-				String seats = scan.nextLine();
-				seatAvail.setId(Integer.parseInt(routeId));
-				flight.setId(Integer.parseInt(routeId));
-				seatAvail.setFlightId(flight);
-				seatAvail.setEconomyClass(Integer.parseInt(seats));
-				es.updateSeats("3",seatAvail);
 
-				System.out.println("Seats updated!");
-				return;
-			}
+					if(!(originCode.equals("N/A") && destCode.equals("N/A"))){ 
+						if((!(originCode.equals("quit"))) && (!(destCode.equals("quit"))) && (!(departureDateTime.equals("quit")))){
+							if((!(departureDateTime.equals("N/A")))){
+								flight.setDepartTime(departureDateTime);
+								as.updateSpecificFlights(flight);
+							}
 
-			if(seatClass.charAt(0) == '4') {
+							route.setOriginAirport(originCode);
 
-				//subMenuTwo();
-				
-				empBack = true;
-			}
-		}
+							route.setDesAirport(destCode);
+							es.updateRoute(route,originCode,destCode);
+						}
+					}
 
-		if(option.charAt(0) == '4') {
-		
-			subMenu();
-			//return;
-			empBack = true;
-		}
-		}while(empBack);
+					System.out.println("Information Successfully Updated!");
+
+					empBack = true;
+				}
+
+
+				// Add Seats to the Flight
+				if(option.charAt(0) == '3') {
+
+					System.out.println("Pick the Seat Class you want to add seats of, to your flight:");
+					System.out.println("1) First " + "\n" +
+							"2) Business " + "\n" + 
+							"3) Economy" + "\n" + 
+							"4) Quit to previous menu");
+
+
+					String seatClass = scan.nextLine();
+
+					// Add First Seats
+					if(seatClass.charAt(0) == '1') {
+						System.out.println("Exisiting number of seats: ");
+						es.getSpecificSeat(routeId, "1");
+						System.out.println("\n");
+
+
+						System.out.println("Enter a new number of seats: ");
+						String seats = scan.nextLine();
+						seatAvail.setId(Integer.parseInt(routeId));
+						flight.setId(Integer.parseInt(routeId));
+						seatAvail.setFlightId(flight);
+						seatAvail.setFirstClass(Integer.parseInt(seats));
+						es.updateSeats("1",seatAvail);
+
+						System.out.println("Seats updated!");
+						//return;
+					}
+
+
+					// Add Business Class Seats
+					if(seatClass.charAt(0) == '2') {
+						System.out.println("Exisiting number of seats: ");
+						System.out.println("\n");
+						es.getSpecificSeat(routeId,"2");
+						System.out.println("\n");
+
+
+						System.out.println("Enter a new number of seats: ");
+						String seats = scan.nextLine();
+						seatAvail.setId(Integer.parseInt(routeId));
+						flight.setId(Integer.parseInt(routeId));
+						seatAvail.setFlightId(flight);
+						seatAvail.setBusinessClass(Integer.parseInt(seats));
+						es.updateSeats("2",seatAvail);
+
+						System.out.println("Seats updated!");
+
+					}
+
+					// Add Economy Seats
+					if(seatClass.charAt(0) == '3') {
+						System.out.println("Exisiting number of seats: ");
+						System.out.println("\n");
+						es.getSpecificSeat(routeId, "3");
+						System.out.println("\n");
+
+						System.out.println("Enter a new number of seats: ");
+						String seats = scan.nextLine();
+						seatAvail.setId(Integer.parseInt(routeId));
+						flight.setId(Integer.parseInt(routeId));
+						seatAvail.setFlightId(flight);
+						seatAvail.setEconomyClass(Integer.parseInt(seats));
+						es.updateSeats("3",seatAvail);
+
+						System.out.println("Seats updated!");
+
+					}
+
+					if(seatClass.charAt(0) == '4') {
+						empBack = true;
+					}
+				}
+
+				// Read the Flights
+				if(option.charAt(0) == '4') {
+
+					EmployeMenu();
+					//return;
+					empBack = true;
+				}
+			}while(empBack);
 		} 
 		catch(Exception e) {
-			
+			System.out.println("Exception: " + e);
 		}
-		
-		
-		
-		
-		
+
 	}
 
-	public static void subMenuThree(){
-		System.out.println("Pick the Seat Class you want to add seats of, to your flight:");
-		System.out.println("1) First " + "\n" +
-				"2) Business " + "\n" + 
-				"3) Economy" + "\n" + 
-				"4) Quit to previous menu");
-	}
 
+
+	//-----------------------------------------------------------------------------------------------------------------------------------------------------
+	// Admin Menu
 	public static void adminMenu() {
-		System.out.println("Select the number from this options: " + "\n" +
-				"1) Add/Update/Delete/Read Flights" + "\n" +
-				"2) Add/Update/Delete/Read Seats" + "\n" +
-				"3) Add/Update/Delete/Read Tickets and Passengers" + "\n" +
-				"4) Add/Update/Delete/Read Airports" + "\n" +
-				"5) Add/Update/Delete/Read Travelors" + "\n" +
-				"6) Add/Update/Delete/Read Employees" + "\n" +
-				"7) Over-ride Trip Cancellation for a ticket." + "\n");
+		boolean back = false;
+		do {
+			System.out.println("Select the number from this options: " + "\n" +
+					"1) Add/Update/Delete/Read Flights" + "\n" +
+					"2) Add/Update/Delete/Read Seats" + "\n" +
+					"3) Add/Update/Delete/Read Tickets and Passengers" + "\n" +
+					"4) Add/Update/Delete/Read Airports" + "\n" +
+					"5) Add/Update/Delete/Read Travelors" + "\n" +
+					"6) Add/Update/Delete/Read Employees" + "\n" +
+					"7) Over-ride Trip Cancellation for a ticket." + "\n" +
+					"8) Quit to Previous." + "\n");
+
+
+
+			String subMenu = scan.nextLine();
+			//boolean back = false;
+			//do {
+			// 1) Add/Update/Delete/Read Flights
+			if(subMenu.charAt(0) == '1') {
 
 
-
-		String subMenu = scan.nextLine();
-		//---------------------------------------------------------------------------------------------------------------------			
-		// Flight Menu
-		if(subMenu.charAt(0) == '1') {
-
-
-			System.out.println("Please Choose one of the number: ");
-
-			System.out.println("Flight " + "\n" +
-					"1) Add " + "\n" +
-					"2) Update " + "\n" +
-					"3) Delete " + "\n" +
-					"4) Read " + "\n");
-			String userOperation = scan.nextLine();
-
-			if(userOperation.charAt(0) == '1') {
-
-
-				try {
-					System.out.println("Please Choose what route to take from "
-							+ "one of the options below...");
-
-					as.getAllRoutes();
-
-					System.out.println("Enter route id... ");
-					String routeId = scan.nextLine();
-
-
-					System.out.println("Please Choose airplane id based "
-							+ "on your max capacity need..");
-
-					as.getAllAriplaneType();
-
-
-					System.out.println("Enter airplane id... ");
-					String airplaneId = scan.nextLine();
-
-					System.out.println("Enter departure time(YYYY-MM-DD HH:MM:SS");
-					String departureDateTime = scan.nextLine();
-
-					System.out.println("Enter total reserved seats");
-					String reservedSeats = scan.nextLine();
-
-					System.out.println("Enter total seat price");
-					String seatPrice = scan.nextLine();
-
-					route.setId(Integer.parseInt(routeId));
-					airplane.setId(Integer.parseInt(airplaneId));
-
-					flight.setRouteId(route);
-					flight.setAirplaneId(airplane);
-					flight.setDepartTime(departureDateTime);
-					flight.setReservedSeats(Integer.parseInt(reservedSeats));
-					flight.setSeatPrice(Double.parseDouble(seatPrice));
-				} catch (SQLException e1) {
-					System.out.println("Exception: " + e1);
-				}
-
-				try {
-					as.addFlight(flight);
-					System.out.println("Flight successfully added");
-					return;
-
-				} catch (SQLException e) {
-
-					System.out.println("Exception: " + e);
-				} finally {
-					//scan.close();
-				}
-			}
-
-			if(userOperation.charAt(0) == '2') {
-
-
-				try {
-
-					System.out.println("Please choose which flight id to update from options below...");
-					as.getAllFlights();
-					System.out.println("Enter flight code to update...");
-					String flightId = scan.nextLine();
-
-					System.out.println("Please ente new route id from options below...");
-					as.getAllRoutes();
-					System.out.println("Enter new route id...");
-					String routeId = scan.nextLine();
-
-					System.out.println("Please enter new airplane id from options below...");
-					as.getAllAriplaneType();
-					System.out.println("Please enter new airplane id...");
-					String airplaneId = scan.nextLine();
-
-					System.out.println("Please enter new departure date and time(YYYY-MM-DD HH:MM:SS...");
-					String departureDateTime = scan.nextLine();
-
-					System.out.println("Please enter new reserved seats...");
-					String reservedSeats = scan.nextLine();
-
-					System.out.println("Please enter new seat price($)....");
-					String seatPrice = scan.nextLine();
-
-					flight.setId(Integer.parseInt(flightId));
-					route.setId(Integer.parseInt(routeId));
-					flight.setRouteId(route);
-					airplane.setId(Integer.parseInt(airplaneId));
-					flight.setAirplaneId(airplane);
-					flight.setDepartTime(departureDateTime);
-					flight.setReservedSeats(Integer.parseInt(reservedSeats));
-					flight.setSeatPrice(Double.parseDouble(seatPrice));
-
-					as.updateFlight(flight);
-					System.out.println("Flight Successfully Updated!");
-					return;
-
-				}catch (SQLException e1) {
-					System.out.println("Exception: " + e1);
-				}
-
-				try {
-					as.updateAirport(airport);
-				} catch (SQLException e) {
-					System.out.println("Exception: " + e);
-				} finally {
-					//scan.close();
-				}
-			}
-
-			if(userOperation.charAt(0) == '3') {
-				try {
-					System.out.println("Please choose which flight id to delete form options from below...");
-					as.getAllFlights();
-					System.out.println("Enter flight id to delete...");
-					String flightId = scan.nextLine();
-
-					flight.setId(Integer.parseInt(flightId));
-
-					as.deleteFlight(flight);
-					System.out.println("Flight Successfully Deleted!");
-					return;
-
-				} catch (SQLException e1) {
-					System.out.println("Exception: " + e1);
-				}
-			}
-
-			if(userOperation.charAt(0) == '4') {
-
-				try {
-					as.getAllFlights();
-					return;
-				} catch (SQLException e) {
-
-					System.out.println("Exception: " + e);
-				} finally {
-					//scan.close();
-				}
-			}
-		}
-
-		//---------------------------------------------------------------------------------------------------------------------			
-		// Seats Menu
-		if(subMenu.charAt(0) == '2') {
-			System.out.println("Please Choose one of the number: ");
-
-			System.out.println("Seats " + "\n" +
-					"1) Add " + "\n" +
-					"2) Update " + "\n" +
-					"3) Delete " + "\n" +
-					"4) Read " + "\n");
-			String userOperation = scan.nextLine();
-
-			if(userOperation.charAt(0) == '1') {
-
-
-				try {
-
-
-					System.out.println("Select what type of seat you want to add...");
-					System.out.println("1) First Class" + "\n" +
-							"2) Business Class" + "\n" +
-							"3) Economy Class");
-
-					String addSeatType = scan.nextLine();
-
-					if(addSeatType.equals("1")) {
-
-						System.out.println("Please choose seat id from below to add more seats...");
-						es.getAllSeat();
-
-						String selectSeatId = scan.nextLine();
-						seatAvail.setId(Integer.parseInt(selectSeatId));
-
-						System.out.println("Please choose flight id from below to add more seats...");
-						as.getAllFlights();
-
-						String selectFlightId = scan.nextLine();
-
-						System.out.println("Please enter how many First Class seats you want to add...");
-						String totalSeats = scan.nextLine();
-						flight.setId(Integer.parseInt(selectFlightId));
-						seatAvail.setFlightId(flight);
-						seatAvail.setFirstClass(Integer.parseInt(totalSeats));
-						es.updateSeats("1", seatAvail);
-
-						System.out.println("Seats successfully added!");
-						return;
-
-					}
-
-					if(addSeatType.equals("2")) {
-
-						System.out.println("Please choose seat id from below to add more seats...");
-						es.getAllSeat();
-
-						String selectSeatId = scan.nextLine();
-						seatAvail.setId(Integer.parseInt(selectSeatId));
-
-						System.out.println("Please choose flight id from below to add more seats...");
-						as.getAllFlights();
-
-						String selectFlightId = scan.nextLine();
-
-						System.out.println("Please enter how many Business Class seats you want to add...");
-						String totalSeats = scan.nextLine();
-						flight.setId(Integer.parseInt(selectFlightId));
-						seatAvail.setFlightId(flight);
-						seatAvail.setBusinessClass(Integer.parseInt(totalSeats));
-						es.updateSeats("2", seatAvail);
-
-						System.out.println("Seats successfully added!");
-						return;
-
-
-
-					}
-					if(addSeatType.equals("3")) {
-
-						System.out.println("Please choose seat id from below to add more seats...");
-						es.getAllSeat();
-
-						String selectSeatId = scan.nextLine();
-						seatAvail.setId(Integer.parseInt(selectSeatId));
-
-						System.out.println("Please choose flight id from below to add more seats...");
-						as.getAllFlights();
-
-						String selectFlightId = scan.nextLine();
-
-						System.out.println("Please enter how many Economy Class seats you want to add...");
-						String totalSeats = scan.nextLine();
-						flight.setId(Integer.parseInt(selectFlightId));
-						seatAvail.setFlightId(flight);
-						seatAvail.setEconomyClass(Integer.parseInt(totalSeats));
-						es.updateSeats("3", seatAvail);
-
-						System.out.println("Seats successfully added!");
-						return;
-
-
-					}
-
-
-
-				} catch (SQLException e1) {
-					System.out.println("Exception: " + e1);
-				}
-			}
-
-			if(userOperation.charAt(0) == '2') {
-				try {
-
-
-					System.out.println("Select what type of seat you want to update...");
-					System.out.println("1) First Class" + "\n" +
-							"2) Business Class" + "\n" +
-							"3) Economy Class");
-
-					String addSeatType = scan.nextLine();
-
-					if(addSeatType.equals("1")) {
-
-						System.out.println("Please choose seat id from below to update seats...");
-						es.getAllSeat();
-
-						String selectSeatId = scan.nextLine();
-						seatAvail.setId(Integer.parseInt(selectSeatId));
-
-						System.out.println("Please choose flight id from below to update seats...");
-						as.getAllFlights();
-
-						String selectFlightId = scan.nextLine();
-
-						System.out.println("Please enter how many First Class seats you want to add to update ...");
-						String totalSeats = scan.nextLine();
-						flight.setId(Integer.parseInt(selectFlightId));
-						seatAvail.setFlightId(flight);
-						seatAvail.setFirstClass(Integer.parseInt(totalSeats));
-						es.updateSeats("1", seatAvail);
-
-						System.out.println("Seats successfully added!");
-						return;
-
-					}
-
-					if(addSeatType.equals("2")) {
-
-						System.out.println("Please choose seat id from below to update seats...");
-						es.getAllSeat();
-
-						String selectSeatId = scan.nextLine();
-						seatAvail.setId(Integer.parseInt(selectSeatId));
-
-						System.out.println("Please choose flight id from below to update seats...");
-						as.getAllFlights();
-
-						String selectFlightId = scan.nextLine();
-
-						System.out.println("Please enter how many Business Class seats you want to add to update...");
-						String totalSeats = scan.nextLine();
-						flight.setId(Integer.parseInt(selectFlightId));
-						seatAvail.setFlightId(flight);
-						seatAvail.setBusinessClass(Integer.parseInt(totalSeats));
-						es.updateSeats("2", seatAvail);
-
-						System.out.println("Seats successfully added!");
-						return;
-
-
-
-					}
-					if(addSeatType.equals("3")) {
-
-						System.out.println("Please choose seat id from below to update seats...");
-						es.getAllSeat();
-
-						String selectSeatId = scan.nextLine();
-						seatAvail.setId(Integer.parseInt(selectSeatId));
-
-						System.out.println("Please choose flight id from below to update seats...");
-						as.getAllFlights();
-
-						String selectFlightId = scan.nextLine();
-
-						System.out.println("Please enter how many Economy Class seats you want to add to update...");
-						String totalSeats = scan.nextLine();
-						flight.setId(Integer.parseInt(selectFlightId));
-						seatAvail.setFlightId(flight);
-						seatAvail.setEconomyClass(Integer.parseInt(totalSeats));
-						es.updateSeats("3", seatAvail);
-
-						System.out.println("Seats successfully added!");
-						return;
-
-
-					}
-
-
-				} catch (SQLException e1) {
-					System.out.println("Exception: " + e1);
-				}
-			}
-
-
-			if(userOperation.charAt(0) == '3') {
-				try {
-					System.out.println("Please choose seat id to delete from options below...");
-
-					es.getAllSeat();
-
-					String deleteSeatId = scan.nextLine();
-					seatAvail.setId(Integer.parseInt(deleteSeatId));
-
-
-					as.deleteSeats(seatAvail);
-					System.out.println("Information Successfully Deleted!");
-					return;
-
-				} catch (SQLException e1) {
-					System.out.println("Exception: " + e1);
-				}
-			}
-
-			if(userOperation.charAt(0) == '4') {
-
-				try {
-					es.getAllSeat();
-					return;
-				} catch (SQLException e) {
-
-					System.out.println("Exception: " + e);
-				} finally {
-					//scan.close();
-				}
-			}
-		}
-
-		//---------------------------------------------------------------------------------------------------------------------			
-		// Booking/Ticket Menu
-		if(subMenu.charAt(0) == '3' || subMenu.charAt(0) == '5') {
-
-			System.out.println("Please select what to manage from options below...");
-			System.out.println("1) Tickets" + "\n" + "2) Passenger");
-			String subMenuTwo = scan.nextLine();
-
-			if(subMenuTwo.charAt(0) == '1') {
 				System.out.println("Please Choose one of the number: ");
 
-				System.out.println("Tickets " + "\n" +
+				System.out.println("Flight " + "\n" +
 						"1) Add " + "\n" +
 						"2) Update " + "\n" +
 						"3) Delete " + "\n" +
-						"4) Read " + "\n");
+						"4) Read " + "\n" + 
+						"5) Quit to Previous" + "\n");
+
 				String userOperation = scan.nextLine();
 
+				// 1) Add Flight
 				if(userOperation.charAt(0) == '1') {
 
 
 					try {
+						System.out.println("Please Choose what route to take from "
+								+ "one of the options below...");
 
-						System.out.println("Please enter 1 if you are booking a ticket...");
-						String isActive = scan.nextLine();
+						as.getAllRoutes();
 
-						System.out.println("Please enter enter a 8 letter/digit confirmation num...");
-						String confirmNum = scan.nextLine();
-
-						booking.setBookingActive(Integer.parseInt(isActive));
-						booking.setConfirmCode(confirmNum);
-						as.addBookings(booking);
+						System.out.println("Enter route id... ");
+						String routeId = scan.nextLine();
 
 
-						System.out.println("1) Add a Ticket for Agent" + "\n" +
-								"2) Add a Ticket for Employee(user)");
+						System.out.println("Please Choose airplane id based "
+								+ "on your max capacity need..");
 
-						String whosTicket = scan.nextLine();
-						if(whosTicket.equals("1")) {
-
-							System.out.println("Please select the booking id corrsponding your confirmation code you entered");
+						as.getAllAriplaneType();
 
 
-							as.getAllBookings();
-							String bookId = scan.nextLine();
+						System.out.println("Enter airplane id... ");
+						String airplaneId = scan.nextLine();
 
-							booking.setId(Integer.parseInt(bookId));
-							bookAgent.setBookingId(booking);
+						System.out.println("Enter departure time(YYYY-MM-DD HH:MM:SS");
+						String departureDateTime = scan.nextLine();
 
-							System.out.println("Lets now enter your information" + "\n");
-							System.out.println("Please enter your role from options below..." + "\n");
-							System.out.println("id name");
-							as.getAllUserRole();
-							String roleId = scan.nextLine();
-							System.out.println("Please enter your given name...");
-							String name = scan.nextLine();
-							System.out.println("Please enter your family name...");
-							String familyName = scan.nextLine();
-							System.out.println("Please enter your userName...");
-							String userName = scan.nextLine();
-							System.out.println("Please enter your email...");
-							String email = scan.nextLine();
-							System.out.println("Please enter your password...");
-							String password = scan.nextLine();
-							System.out.println("Please enter your phone...");
-							String phone = scan.nextLine();
+						System.out.println("Enter total reserved seats");
+						String reservedSeats = scan.nextLine();
 
+						System.out.println("Enter total seat price");
+						String seatPrice = scan.nextLine();
 
-							userRole.setId(Integer.parseInt(roleId));
-							user.setRoleId(userRole);
-							user.setGivenName(name);
-							user.setFamilyName(familyName);
-							user.setUserName(userName);
-							user.setEmail(email);
-							user.setPassword(password);
-							user.setPhone(phone);
+						route.setId(Integer.parseInt(routeId));
+						airplane.setId(Integer.parseInt(airplaneId));
 
-
-							as.addEmployee(user);
-							System.out.println("Please select your user id from names below...");
-							as.getAllUsers();
-							String userId = scan.nextLine();
-							user.setId(Integer.parseInt(userId));
-							bookAgent.setAgentId(user);
-							as.addBookingAgent(bookAgent);
-
-							System.out.println("Now lests enter ticket information...");
-
-
-							ticket.setBookingId(booking);
-							System.out.println("Select what type of ticket you want to book...");
-							System.out.println("1) First Class" + "\n" +
-									"2) Business Class" + "\n" +
-									"3) Economy Class");
-
-							String chooseTicket = scan.nextLine();
-							if(chooseTicket.equals("1")) {
-								ticket.setTicketType("first");
-							}
-							if(chooseTicket.equals("2")) {
-								ticket.setTicketType("business");
-							}
-							if(chooseTicket.equals("3")) {
-								ticket.setTicketType("economy");
-							}
-							ts.addTicket(ticket);
-
-							System.out.println("Ticket successfully added!");
-
-
-							return;
-
-
-						}
-						if(whosTicket.equals("2")){
-							System.out.println("Please select the booking id corrsponding your confirmation code you entered");
-
-							System.out.println("id act confirmCode");
-							as.getAllBookings();
-							String bookId = scan.nextLine();
-
-							booking.setId(Integer.parseInt(bookId));
-							bookUser.setBookingId(booking);
-
-							System.out.println("Lets now enter your information" + "\n");
-							System.out.println("Please enter your role from options below..." + "\n");
-							System.out.println("id name");
-							as.getAllUserRole();
-							String roleId = scan.nextLine();
-							System.out.println("Please enter your given name...");
-							String name = scan.nextLine();
-							System.out.println("Please enter your family name...");
-							String familyName = scan.nextLine();
-							System.out.println("Please enter your userName...");
-							String userName = scan.nextLine();
-							System.out.println("Please enter your email...");
-							String email = scan.nextLine();
-							System.out.println("Please enter your password...");
-							String password = scan.nextLine();
-							System.out.println("Please enter your phone...");
-							String phone = scan.nextLine();
-
-							userRole.setId(Integer.parseInt(roleId));
-							user.setRoleId(userRole);
-							user.setGivenName(name);
-							user.setFamilyName(familyName);
-							user.setUserName(userName);
-							user.setEmail(email);
-							user.setPassword(password);
-							user.setPhone(phone);
-
-
-							as.addEmployee(user);
-							System.out.println("Please select your user id from names below...");
-							as.getAllUsers();
-							String userId = scan.nextLine();
-							user.setId(Integer.parseInt(userId));
-							bookUser.setUserId(user);
-							as.addBookingUser(bookUser);
-
-							System.out.println("Now lests enter ticket information...");
-
-
-							ticket.setBookingId(booking);
-							System.out.println("Select what type of ticket you want to book...");
-							System.out.println("1) First Class" + "\n" +
-									"2) Business Class" + "\n" +
-									"3) Economy Class");
-
-							String chooseTicket = scan.nextLine();
-							if(chooseTicket.equals("1")) {
-								ticket.setTicketType("first");
-							}
-							if(chooseTicket.equals("2")) {
-								ticket.setTicketType("business");
-							}
-							if(chooseTicket.equals("3")) {
-								ticket.setTicketType("economy");
-							}
-							ts.addTicket(ticket);
-
-							System.out.println("Ticket successfully added!");
-							return;
-						}
-
+						flight.setRouteId(route);
+						flight.setAirplaneId(airplane);
+						flight.setDepartTime(departureDateTime);
+						flight.setReservedSeats(Integer.parseInt(reservedSeats));
+						flight.setSeatPrice(Double.parseDouble(seatPrice));
 					} catch (SQLException e1) {
 						System.out.println("Exception: " + e1);
 					}
+
+					try {
+						as.addFlight(flight);
+						System.out.println("Flight successfully added");
+						back = true;
+
+					} catch (SQLException e) {
+
+						System.out.println("Exception: " + e);
+					} 
 				}
 
+
+				// 2) Update Flight
 				if(userOperation.charAt(0) == '2') {
 
 
 					try {
 
-						System.out.println("Please choose booking id to update from options below...");
-						as.getAllBookings();
-						String bookingId = scan.nextLine();
+						System.out.println("Please choose which flight id to update from options below...");
+						as.getAllFlights();
+						System.out.println("Enter flight code to update...");
+						String flightId = scan.nextLine();
 
-						System.out.println("Please enter 1 if you are updating booking...");
-						String isActive = scan.nextLine();
+						System.out.println("Please ente new route id from options below...");
+						as.getAllRoutes();
+						System.out.println("Enter new route id...");
+						String routeId = scan.nextLine();
 
-						System.out.println("Please enter your own updated 8 letter/digit confirmation code...");
-						String confirmCode = scan.nextLine();
+						System.out.println("Please enter new airplane id from options below...");
+						as.getAllAriplaneType();
+						System.out.println("Please enter new airplane id...");
+						String airplaneId = scan.nextLine();
 
-						System.out.println("Please choose ticket id to update...");
-						as.getAllTickets();
+						System.out.println("Please enter new departure date and time(YYYY-MM-DD HH:MM:SS...");
+						String departureDateTime = scan.nextLine();
 
-						String ticketId = scan.nextLine();
-						ticket.setId(Integer.parseInt(ticketId));
+						System.out.println("Please enter new reserved seats...");
+						String reservedSeats = scan.nextLine();
 
-						booking.setId(Integer.parseInt(bookingId));
-						booking.setBookingActive(Integer.parseInt(isActive));
-						booking.setConfirmCode(confirmCode);
+						System.out.println("Please enter new seat price($)....");
+						String seatPrice = scan.nextLine();
 
+						flight.setId(Integer.parseInt(flightId));
+						route.setId(Integer.parseInt(routeId));
+						flight.setRouteId(route);
+						airplane.setId(Integer.parseInt(airplaneId));
+						flight.setAirplaneId(airplane);
+						flight.setDepartTime(departureDateTime);
+						flight.setReservedSeats(Integer.parseInt(reservedSeats));
+						flight.setSeatPrice(Double.parseDouble(seatPrice));
 
-						ticket.setBookingId(booking);
+						as.updateFlight(flight);
+						System.out.println("Flight Successfully Updated!");
 
-						System.out.println("Please choose a new seat class...");
-
-						System.out.println("1) First Class" + "\n" +
-								"2) Business Class" + "\n" +
-								"3) Economy Class");
-
-						String chooseTicket = scan.nextLine();
-						if(chooseTicket.equals("1")) {
-							ticket.setTicketType("first");
-						}
-						if(chooseTicket.equals("2")) {
-							ticket.setTicketType("business");
-						}
-						if(chooseTicket.equals("3")) {
-							ticket.setTicketType("economy");
-						}
-
-						ts.updateTicket(ticket);
-
-
-						as.updateBooking(booking);
-						System.out.println("Information Successfully Updated!");
-						return;
-
-					}catch (SQLException e1) {
-						System.out.println("Exception: " + e1);
+						as.updateAirport(airport);
+						back = true;
+					} 
+					catch (SQLException e) {
+						System.out.println("Exception: " + e);
 					}
 				}
 
+				// 3) Delete Flight
 				if(userOperation.charAt(0) == '3') {
 					try {
-						System.out.println("Please choose booking id to delete from options from below...");
-						as.getAllBookings();
-						System.out.println("Enter booking id to delete...");
-						String bookingId = scan.nextLine();
+						System.out.println("Please choose which flight id to delete form options from below...");
+						as.getAllFlights();
+						System.out.println("Enter flight id to delete...");
+						String flightId = scan.nextLine();
 
-						booking.setId(Integer.parseInt(bookingId));
+						flight.setId(Integer.parseInt(flightId));
 
-						as.deleteBookings(booking);
-						System.out.println("Information Successfully Deleted!");
-						return;
+						as.deleteFlight(flight);
+						System.out.println("Flight Successfully Deleted!");
+						back = true;
 
 					} catch (SQLException e1) {
 						System.out.println("Exception: " + e1);
 					}
 				}
 
+
+				// 4) Read Flight
 				if(userOperation.charAt(0) == '4') {
 
 					try {
-
-						as.getAllBookings();
-						return;
+						as.getAllFlights();
+						back = true;
 					} catch (SQLException e) {
 
 						System.out.println("Exception: " + e);
-					} finally {
-						//scan.close();
 					}
 				}
+
+				// 5) Quit to previous
+				if(userOperation.charAt(0) == '5') {
+					back = true;
+
+				}
+
 			}
 
 
 			//---------------------------------------------------------------------------------------------------------------------			
-			// Passenger Menu
-			if(subMenuTwo.charAt(0) == '2') {
-				System.out.println("Please Choose one of the number: ");
 
-				System.out.println("Passenger " + "\n" +
-						"1) Add " + "\n" +
-						"2) Update " + "\n" +
-						"3) Delete " + "\n" +
-						"4) Read " + "\n");
-				String userOperation = scan.nextLine();
+			// 2) Add/Update/Delete/Read Seats
+			if(subMenu.charAt(0) == '2') {
 
-				if(userOperation.charAt(0) == '1') {
-
-
-					try {
-
-						System.out.println("Please enter booking id from below options...");
-						as.getAllBookings();
-						String bookingId = scan.nextLine();
-
-						System.out.println("Please enter your given name...");
-						String givenName = scan.nextLine();
-
-						System.out.println("Please enter your family name...");
-						String familyName = scan.nextLine();
-
-						System.out.println("Please enter your date of birth(YYYY-MM-DD)...");
-						String birthDay = scan.nextLine();
-
-						System.out.println("Please enter your gender...");
-						String gender = scan.nextLine();
-
-						System.out.println("Please enter your address...");
-						String address = scan.nextLine();
-
-						booking.setId(Integer.parseInt(bookingId));
-						passenger.setBookingId(booking);
-						passenger.setGivenName(givenName);
-						passenger.setFamilyName(familyName);
-						passenger.setBirthDay(birthDay);
-						passenger.setGender(gender);
-						passenger.setAddress(address);
-
-						as.addPassengers(passenger);
-						System.out.println("Passenger successfully added!");
-						return;
-
-					} catch (SQLException e1) {
-						System.out.println("Exception: " + e1);
-					}
-				}
-
-				if(userOperation.charAt(0) == '2') {
-
-
-					try {
-
-						System.out.println("Please choose passenger id to update from options below...");
-						as.getAllPassengers();
-						String passengerId = scan.nextLine();
-
-						System.out.println("Please enter new booking id to update from options below...");
-						as.getAllBookings();
-						String bookingId = scan.nextLine();
-
-						System.out.println("Please enter new given name to update...");
-						String givenName = scan.nextLine();
-
-						System.out.println("Please enter new family name to update...");
-						String familyName = scan.nextLine();
-
-						System.out.println("Please enter new date of birth(YYYY-MM-DD) to update...");
-						String birthDate = scan.nextLine();
-
-						System.out.println("Please enter new gender to update...");
-						String gender = scan.nextLine();
-
-						System.out.println("Please enter new address to update...");
-						String address = scan.nextLine();
-
-						passenger.setId(Integer.parseInt(passengerId));
-						booking.setId(Integer.parseInt(bookingId));
-						passenger.setBookingId(booking);
-						passenger.setGivenName(givenName);
-						passenger.setFamilyName(familyName);
-						passenger.setBirthDay(birthDate);
-						passenger.setGender(gender);
-						passenger.setAddress(address);
-
-						as.updatePassenger(passenger);
-						System.out.println("Information Successfully Updated!");
-						return;
-
-					}catch (SQLException e1) {
-						System.out.println("Exception: " + e1);
-					}
-				}
-
-				if(userOperation.charAt(0) == '3') {
-					try {
-						System.out.println("Please choose passenger id to delete from options from below...");
-						as.getAllPassengers();
-						System.out.println("Enter Passenger id to delete...");
-						String passengerId = scan.nextLine();
-
-						passenger.setId(Integer.parseInt(passengerId));
-
-						as.deletePassenger(passenger);
-						System.out.println("Information Successfully Deleted!");
-						return;
-
-					} catch (SQLException e1) {
-						System.out.println("Exception: " + e1);
-					}
-				}
-
-				if(userOperation.charAt(0) == '4') {
-
-					try {
-						as.getAllPassengers();
-						return;
-					} catch (SQLException e) {
-
-						System.out.println("Exception: " + e);
-					} finally {
-						//scan.close();
-					}
-				}
-			}
-
-		}
-
-		//---------------------------------------------------------------------------------------------------------------------			
-		// Airport Menu
-		if(subMenu.charAt(0) == '4') {
-			System.out.println("Please Choose one of the number: ");
-
-			System.out.println("Airport " + "\n" +
-					"1) Add " + "\n" +
-					"2) Update " + "\n" +
-					"3) Delete " + "\n" +
-					"4) Read " + "\n");
-			String userOperation = scan.nextLine();
-
-			if(userOperation.charAt(0) == '1') {
-				System.out.println("Enter airport code");
-				String airportCode = scan.nextLine();
-
-				System.out.println("Enter city name");
-				String cityName = scan.nextLine();
-
-				airport.setAirportCode(airportCode);
-				airport.setCityName(cityName);
-
-				try {
-					as.addAirport(airport);
-					System.out.println("Airport succussfully added!");
-					return;
-				} catch (SQLException e) {
-
-					System.out.println("Exception: " + e);
-				} finally {
-					//scan.close();
-				}
-			}
-
-			if(userOperation.charAt(0) == '2') {
-
-
-				try {
-					System.out.println("Enter airport code to update from options below");
-
-					as.getAllAirports();
-
-					String airportCode = scan.nextLine();
-
-					System.out.println("Enter new city name");
-					String newCityName = scan.nextLine();
-
-					airport.setAirportCode(airportCode);
-					airport.setCityName(newCityName);
-
-					as.updateAirport(airport);
-					System.out.println("Airport Successfully Updated!");
-					return;
-
-				} catch (SQLException e) {
-
-					System.out.println("Exception: " + e);
-				} finally {
-					//scan.close();
-				}
-			}
-
-			if(userOperation.charAt(0) == '3') {
-
-				try {
-
-					System.out.println("Enter choose which airpote id to delete from options below...");
-					as.getAllAirports();
-					System.out.println("Please enter airport code to delete...");
-					String airportCode = scan.nextLine();
-
-					airport.setAirportCode(airportCode);
-
-					as.deleteAirport(airport);
-					System.out.println("Airport Successfully Deleted!");
-					return;
-
-				} catch (SQLException e) {
-
-					System.out.println("Exception: " + e);
-				} finally {
-					//scan.close();
-				}
-			}
-
-			if(userOperation.charAt(0) == '4') {
-
-				try {
-					as.getAllAirports();
-					return;
-				} catch (SQLException e) {
-
-					System.out.println("Exception: " + e);
-				} finally {
-					//scan.close();
-				}
-			}
-		}
-
-
-		//---------------------------------------------------------------------------------------------------------------------			
-		// Employee Menu
-		if(subMenu.charAt(0) == '6') {
-			System.out.println("Please Choose one of the number: ");
-
-			System.out.println("Employee " + "\n" +
-					"1) Add " + "\n" +
-					"2) Update " + "\n" +
-					"3) Delete " + "\n" +
-					"4) Read " + "\n");
-			String userOperation = scan.nextLine();
-
-			if(userOperation.charAt(0) == '1') {
-
-
-				try {
-
-					System.out.println("Please select user role id from the options below...");
-					as.getAllUserRole();
-					String roleId = scan.nextLine();
-
-					System.out.println("Please enter given name...");
-					String givenName = scan.nextLine();
-
-					System.out.println("Please enter family name...");
-					String familyName = scan.nextLine();
-
-					System.out.println("Please enter username...");
-					String userName = scan.nextLine();
-
-					System.out.println("Please enter email...");
-					String email = scan.nextLine();
-
-					System.out.println("Please enter password...");
-					String password = scan.nextLine();
-
-					System.out.println("Please enter phone number(XXX-XXX-XXXX)...");
-					String phNum = scan.nextLine();
-
-					userRole.setId(Integer.parseInt(roleId));
-					user.setRoleId(userRole);
-					user.setGivenName(givenName);
-					user.setFamilyName(familyName);
-					user.setUserName(userName);
-					user.setEmail(email);
-					user.setPassword(password);
-					user.setPhone(phNum);
-
-					as.addEmployee(user);
-					System.out.println("Employee successfully added!");
-					return;
-
-				} catch (SQLException e1) {
-					System.out.println("Exception: " + e1);
-				}
-			}
-
-			if(userOperation.charAt(0) == '2') {
-
-
-				try {
-
-					System.out.println("Please choose user id from options below...");
-					as.getAllUsers();
-					String userId = scan.nextLine();
-
-					System.out.println("Please enter role id from options below to update...");
-					as.getAllUserRole();
-					String roleId = scan.nextLine();
-
-					System.out.println("Please enter new given name to update...");
-					String givenName = scan.nextLine();
-
-					System.out.println("Please enter new family name to update...");
-					String familyName = scan.nextLine();
-
-					System.out.println("Please enter new username to update...");
-					String userName = scan.nextLine();
-
-					System.out.println("Please enter new email to update...");
-					String email = scan.nextLine();
-
-					System.out.println("Please enter new password to update...");
-					String password = scan.nextLine();
-
-					System.out.println("Please enter new phone(XXX-XXX-XXXX) to update...");
-					String phNum = scan.nextLine();
-
-					user.setId(Integer.parseInt(userId));
-					userRole.setId(Integer.parseInt(roleId));
-					user.setRoleId(userRole);
-					user.setGivenName(givenName);
-					user.setFamilyName(familyName);
-					user.setUserName(userName);
-					user.setEmail(email);
-					user.setPassword(password);
-					user.setPhone(phNum);
-
-
-					as.updateEmployee(user);
-					System.out.println("Information Successfully Updated!");
-					return;
-
-				}catch (SQLException e1) {
-					System.out.println("Exception: " + e1);
-				}
-			}
-
-			if(userOperation.charAt(0) == '3') {
-				try {
-					System.out.println("Please choose user id to delete form options from below...");
-					as.getAllUsers();
-					System.out.println("Enter user id to delete...");
-					String userId = scan.nextLine();
-
-					user.setId(Integer.parseInt(userId));
-					as.deleteEmployee(user);
-					System.out.println("Information Successfully Deleted!");
-					return;
-
-				} catch (SQLException e1) {
-					System.out.println("Exception: " + e1);
-				}
-			}
-
-			if(userOperation.charAt(0) == '4') {
-
-				try {
-					as.getAllEmployee();
-					return;
-				} catch (SQLException e) {
-
-					System.out.println("Exception: " + e);
-				} finally {
-					//scan.close();
-				}
-			}
-		}
-
-		//---------------------------------------------------------------------------------------------------------------------			
-		// Over ride Ticket Cancellation Menu
-		if(subMenu.charAt(0) == '7') {
-
-			try{
-				System.out.println("Please choose booking id to delete from options from below...");
-				as.getAllBookings();
-				System.out.println("Enter booking id to delete...");
-				String bookingId = scan.nextLine();
-
-				booking.setId(Integer.parseInt(bookingId));
-
-				as.deleteBookings(booking);
-				System.out.println("Information Successfully Deleted!");
-				return;
-
-			} catch (SQLException e1) {
-				System.out.println("Exception: " + e1);
-			}
-		}
-
-
-
-
-
-
-	}
-
-	public static void travelorMenu() {
-
-		System.out.println("Enter your Membership Number...");
-		String memberId = scan.nextLine();
-
-
-		// checking if traveler entered their membership id then only proceeds
-		if(!(memberId.isBlank())) {
-			travelerMainMenu();
-			boolean subBack = false;
-
-
-			do {
-
-				String passenInput = scan.nextLine();
-
-
-				if(passenInput.equals("1")) {
-					try {
-
-
-						es.getAllOriginFlightsWithCity(); // given in RouteDao
-						System.out.print("\n");	
-
-						es.getAllDestFlightsWithCity(); // given in RouteDao
-
-						System.out.println("\n");
-						System.out.println("Pick the flight you want to book");
-						String flightId = scan.nextLine();
-
-						travelerSubMenu();
-
-
-						System.out.println("Pick the seat you want to book");
-						System.out.println("\n");
-
-						boolean backTwo = false;
-						do{
-							String seatType = scan.nextLine();
-
-							if(seatType.equals("1")) {
-
-								System.out.println("\n");
-
-								es.getAllFlightDetail(flightId);
-
-								travelerSubMenu();
-								subBack = true;	
-								backTwo = true;
-
-
-							}
-
-
-							if(seatType.equals("2")) {
-
-								// for first class seat booking
-								System.out.println("Please enter 1 if you are booking a ticket");
-								String isActive = scan.nextLine();
-								System.out.println("Please enter 8 letter/degit confirmation code for your reference");
-								String confirmCode = scan.nextLine();
-
-								booking.setBookingActive(Integer.parseInt(isActive));
-								booking.setConfirmCode(confirmCode);
-								as.addBookings(booking);
-
-
-								as.getAllBookings();
-
-								System.out.println("Please select your booking id from above list based on your confirmation code you just entered");
-
-								String bookingId = scan.nextLine();
-
-								// Now use ticket() class to add a ticket type
-								booking.setId(Integer.parseInt(bookingId));
-								ticket.setBookingId(booking);
-								ticket.setTicketType("first");
-								ts.addTicket(ticket);
-
-
-
-								System.out.println("You Booked your ticket!" + "\n");
-								return;
-
-
-							}
-
-
-							if(seatType.equals("3")) {
-								// for business class seat booking
-								System.out.println("Please enter 1 if you are booking a ticket");
-								String isActive = scan.nextLine();
-								System.out.println("Please enter 8 letter/degit confirmation code for your reference");
-								String confirmCode = scan.nextLine();
-
-								booking.setBookingActive(Integer.parseInt(isActive));
-								booking.setConfirmCode(confirmCode);
-								as.addBookings(booking);
-
-
-								as.getAllBookings();
-
-								System.out.println("Please select your booking id from above list based on your confirmation code you just entered");
-
-								String bookingId = scan.nextLine();
-
-								booking.setId(Integer.parseInt(bookingId));
-								ticket.setBookingId(booking);
-								ticket.setTicketType("business");
-								ts.addTicket(ticket);
-
-
-
-								System.out.println("You Booked your ticket!" + "\n");
-								return;
-							}
-
-
-							if(seatType.equals("4")) {
-
-								// for economy class seat booking
-								System.out.println("Please enter 1 if you are booking a ticket");
-								String isActive = scan.nextLine();
-								System.out.println("Please enter 8 letter/degit confirmation code for your reference");
-								String confirmCode = scan.nextLine();
-
-								booking.setBookingActive(Integer.parseInt(isActive));
-								booking.setConfirmCode(confirmCode);
-								as.addBookings(booking);
-
-
-								as.getAllBookings();
-
-								System.out.println("Please select your booking id from above list based on your confirmation code you just entered");
-
-								String bookingId = scan.nextLine();
-
-								// Now use ticket() class to add a ticket type
-								booking.setId(Integer.parseInt(bookingId));
-								ticket.setBookingId(booking);
-								ticket.setTicketType("economy");
-								ts.addTicket(ticket);
-
-
-
-								System.out.println("You Booked your ticket!" + "\n");
-								return;
-							}
-							if(seatType.equals("5")) {
-								subBack = true;
-								travelerMainMenu();
-								backTwo = false;
-
-							}
-
-						}while(backTwo);
-
-
-					} catch (SQLException e) {
-						System.out.println("Exception: " + e);e.printStackTrace();
-					} 
-
-				}
-
-
-				if(passenInput.equals("2")) {
-
-
-					try {
-
-
-						as.getAllBookings();
-						System.out.println("\n");
-						System.out.println("Select the id corresponding your confirmation code to cancel your trip... ");
-						String cancelBooking = scan.nextLine();
-						booking.setId(Integer.parseInt(cancelBooking));
-						as.deleteBookings(booking);
-
-						System.out.println("Your booking is successfully canceled!");
-						return;
-
-					} catch (SQLException e) {
-						System.out.println("Exception: " + e);
-					}
-				}
-
-
-				if(passenInput.equals("3")) {
-
-					//mainBack = true;
-					subBack = false;
-
-
-				}
-			}while(subBack);
-
-		}
-		else {
-			System.out.println("You entered nothing/wrong membership number, Good Bye!");
-			return;
-
-		}
-	}
-
-
-	public static void travelerMainMenu() {
-		System.out.println("1) Book a Ticket " + "\n" +
-				"2) Cancel an Upcoming Trip " + "\n" + 
-				"3) Quit to Previous");
-	}
-
-	public static void travelerSubMenu() {
-		System.out.println("\n");
-		System.out.println("1) View Flight Details " + "\n" +
-				"2) First " + "\n" + 
-				"3) Business " + "\n" + 
-				"4) Economy " + "\n" + 
-				"5) Quit to previous menu ");
-	}
-
-
-
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-
-
-		/*Airport airport = new Airport();
-		Flight flight = new Flight();
-		Route route = new Route();
-		Airplane airplane = new Airplane();
-		Booking booking = new Booking();
-		Passenger passenger = new Passenger();
-		UserRole userRole = new UserRole();
-		Ticket ticket = new Ticket();
-		SeatAvailability seatAvail = new SeatAvailability();
-		User user = new User();
-		BookingAgent bookAgent = new BookingAgent();
-		BookingUser bookUser = new BookingUser();
-
-		AdminService as = new AdminService();
-		EmployeeService es = new EmployeeService();
-		TravelerService ts = new TravelerService();
-
-		Scanner scan = new Scanner(System.in);*/
-
-
-		boolean mainBack = false;
-
-		do{
-			mainMenu();
-
-			//String identityCode = scan.nextLine();
-
-			/*	if(identityCode.charAt(0) == '1'){
-
-				subMenu();
-
-				String employeeInput = scan.nextLine();
-
-
-				if(employeeInput.charAt(0) == '1') {
-
-
-					try {
-
-
-						// IMPROVE THIS BY OUTPUTTING TABLE SIDE BY SIDE WHEN GET A CHANCE
-						System.out.println("Select which flight you want to manage " + "\n");
-
-						es.getAllOriginFlightsWithCity(); // given in RouteDao
-						System.out.print("\n");
-
-						es.getAllDestFlightsWithCity(); // given in RouteDao
-
-
-
-
-						System.out.println("\n" + "Select id from above list to manage...");
-						String routeId = scan.nextLine();
-
-						System.out.println("Select option from below lists..." + "\n");
-
-						subMenuTwo();
-
-						boolean empBack = false;
-						do{
-							String option = scan.nextLine();
-
-							if(option.charAt(0) == '1') {
-
-								es.getAllFlightDetail(routeId);
-								System.out.println("\n" + "Press 2 to return to previous menu");
-
-								String input = scan.nextLine();
-
-								if(input.equals("2")) {
-									subMenuTwo();
-									empBack = true;
-								}
-
-							}
-
-
-							if(option.charAt(0) == '2') {
-
-								System.out.println("You have choosen to update the below flight" + "\n");
-
-								es.getAllFlightDetail(routeId);
-
-								System.out.println("\n" + "Enter 'quit' at any prompt to cancel operation");
-
-
-								System.out.println("\n");
-								System.out.println("Please enter new 3 letter Origin airport code or N/A for no change)");
-								String originCode = scan.nextLine();
-
-								System.out.println("Please enter new 3 letter Destination airport code or N/A for no change)");
-								String destCode = scan.nextLine();
-
-								System.out.println("Please enter new departure date and time(YYYY-MM-DD HH:MM:SS) or N/A for no change");
-								String departureDateTime = scan.nextLine();
-
-
-								if(originCode.equals("quit") || destCode.equals("quit") || departureDateTime.equals("quit")) {
-									//scan.close();
-									return;
-								}
-
-
-
-								route.setId(Integer.parseInt(routeId));
-								flight.setRouteId(route);
-								flight.setId(Integer.parseInt(routeId));
-
-
-								if(!(departureDateTime.equals("N/A"))) {
-									flight.setDepartTime(departureDateTime);
-									as.updateSpecificFlights(flight);
-								}
-
-
-								route.setOriginAirport(originCode);
-
-								route.setDesAirport(destCode);
-
-								if(!(originCode.equals("N/A") && destCode.equals("N/A"))) {
-									es.updateRoute(route,originCode,destCode);
-								}
-
-								System.out.println("Information Successfully Updated!");
-
-								subMenuTwo();
-								empBack = true;
-							}
-
-							if(option.charAt(0) == '3') {
-
-								subMenuThree();
-
-								String seatClass = scan.nextLine();
-								if(seatClass.charAt(0) == '1') {
-									System.out.println("Exisiting number of seats: ");
-									es.getSpecificSeat(routeId, "1");
-									System.out.println("\n");
-
-
-									System.out.println("Enter a new number of seats: ");
-									String seats = scan.nextLine();
-									seatAvail.setId(Integer.parseInt(routeId));
-									flight.setId(Integer.parseInt(routeId));
-									seatAvail.setFlightId(flight);
-									seatAvail.setFirstClass(Integer.parseInt(seats));
-									es.updateSeats("1",seatAvail);
-
-									System.out.println("Seats updated!");
-									return;
-								}
-
-								if(seatClass.charAt(0) == '2') {
-									System.out.println("Exisiting number of seats: ");
-									System.out.println("\n");
-									es.getSpecificSeat(routeId,"2");
-									System.out.println("\n");
-
-
-									System.out.println("Enter a new number of seats: ");
-									String seats = scan.nextLine();
-									seatAvail.setId(Integer.parseInt(routeId));
-									flight.setId(Integer.parseInt(routeId));
-									seatAvail.setFlightId(flight);
-									seatAvail.setBusinessClass(Integer.parseInt(seats));
-									es.updateSeats("2",seatAvail);
-
-									System.out.println("Seats updated!");
-									return;
-								}
-
-								if(seatClass.charAt(0) == '3') {
-									System.out.println("Exisiting number of seats: ");
-									System.out.println("\n");
-									es.getSpecificSeat(routeId, "3");
-									System.out.println("\n");
-
-									System.out.println("Enter a new number of seats: ");
-									String seats = scan.nextLine();
-									seatAvail.setId(Integer.parseInt(routeId));
-									flight.setId(Integer.parseInt(routeId));
-									seatAvail.setFlightId(flight);
-									seatAvail.setEconomyClass(Integer.parseInt(seats));
-									es.updateSeats("3",seatAvail);
-
-									System.out.println("Seats updated!");
-									return;
-								}
-
-								if(seatClass.charAt(0) == '4') {
-
-									subMenuTwo();
-									empBack = true;
-								}
-							}
-
-							if(option.charAt(0) == '4') {
-								return;
-							}
-						}while(empBack);
-
-
-					} catch (SQLException e) {
-						System.out.println("Exception: " + e);
-					}
-
-
-				}
-
-				if(employeeInput.charAt(0) == '2') {
-
-					mainBack = true;
-				}
-
-
-			}*/
-
-
-
-			//----------------------------------------------------------------------------------------------------------------------------------
-
-			// FOR ADMINISTRATOR
-
-			/*	if(identityCode.charAt(0) == '2'){
-
-				System.out.println("Select the number from this options: " + "\n" +
-						"1) Add/Update/Delete/Read Flights" + "\n" +
-						"2) Add/Update/Delete/Read Seats" + "\n" +
-						"3) Add/Update/Delete/Read Tickets and Passengers" + "\n" +
-						"4) Add/Update/Delete/Read Airports" + "\n" +
-						"5) Add/Update/Delete/Read Travelors" + "\n" +
-						"6) Add/Update/Delete/Read Employees" + "\n" +
-						"7) Over-ride Trip Cancellation for a ticket." + "\n");
-
-				String subMenu = scan.nextLine();
-				//---------------------------------------------------------------------------------------------------------------------			
-				// Flight Menu
-				if(subMenu.charAt(0) == '1') {
-
-
-					System.out.println("Please Choose one of the number: ");
-
-					System.out.println("Flight " + "\n" +
-							"1) Add " + "\n" +
-							"2) Update " + "\n" +
-							"3) Delete " + "\n" +
-							"4) Read " + "\n");
-					String userOperation = scan.nextLine();
-
-					if(userOperation.charAt(0) == '1') {
-
-
-						try {
-							System.out.println("Please Choose what route to take from "
-									+ "one of the options below...");
-
-							as.getAllRoutes();
-
-							System.out.println("Enter route id... ");
-							String routeId = scan.nextLine();
-
-
-							System.out.println("Please Choose airplane id based "
-									+ "on your max capacity need..");
-
-							as.getAllAriplaneType();
-
-
-							System.out.println("Enter airplane id... ");
-							String airplaneId = scan.nextLine();
-
-							System.out.println("Enter departure time(YYYY-MM-DD HH:MM:SS");
-							String departureDateTime = scan.nextLine();
-
-							System.out.println("Enter total reserved seats");
-							String reservedSeats = scan.nextLine();
-
-							System.out.println("Enter total seat price");
-							String seatPrice = scan.nextLine();
-
-							route.setId(Integer.parseInt(routeId));
-							airplane.setId(Integer.parseInt(airplaneId));
-
-							flight.setRouteId(route);
-							flight.setAirplaneId(airplane);
-							flight.setDepartTime(departureDateTime);
-							flight.setReservedSeats(Integer.parseInt(reservedSeats));
-							flight.setSeatPrice(Double.parseDouble(seatPrice));
-						} catch (SQLException e1) {
-							System.out.println("Exception: " + e1);
-						}
-
-						try {
-							as.addFlight(flight);
-							System.out.println("Flight successfully added");
-							return;
-
-						} catch (SQLException e) {
-
-							System.out.println("Exception: " + e);
-						} finally {
-							//scan.close();
-						}
-					}
-
-					if(userOperation.charAt(0) == '2') {
-
-
-						try {
-
-							System.out.println("Please choose which flight id to update from options below...");
-							as.getAllFlights();
-							System.out.println("Enter flight code to update...");
-							String flightId = scan.nextLine();
-
-							System.out.println("Please ente new route id from options below...");
-							as.getAllRoutes();
-							System.out.println("Enter new route id...");
-							String routeId = scan.nextLine();
-
-							System.out.println("Please enter new airplane id from options below...");
-							as.getAllAriplaneType();
-							System.out.println("Please enter new airplane id...");
-							String airplaneId = scan.nextLine();
-
-							System.out.println("Please enter new departure date and time(YYYY-MM-DD HH:MM:SS...");
-							String departureDateTime = scan.nextLine();
-
-							System.out.println("Please enter new reserved seats...");
-							String reservedSeats = scan.nextLine();
-
-							System.out.println("Please enter new seat price($)....");
-							String seatPrice = scan.nextLine();
-
-							flight.setId(Integer.parseInt(flightId));
-							route.setId(Integer.parseInt(routeId));
-							flight.setRouteId(route);
-							airplane.setId(Integer.parseInt(airplaneId));
-							flight.setAirplaneId(airplane);
-							flight.setDepartTime(departureDateTime);
-							flight.setReservedSeats(Integer.parseInt(reservedSeats));
-							flight.setSeatPrice(Double.parseDouble(seatPrice));
-
-							as.updateFlight(flight);
-							System.out.println("Flight Successfully Updated!");
-							return;
-
-						}catch (SQLException e1) {
-							System.out.println("Exception: " + e1);
-						}
-
-						try {
-							as.updateAirport(airport);
-						} catch (SQLException e) {
-							System.out.println("Exception: " + e);
-						} finally {
-							//scan.close();
-						}
-					}
-
-					if(userOperation.charAt(0) == '3') {
-						try {
-							System.out.println("Please choose which flight id to delete form options from below...");
-							as.getAllFlights();
-							System.out.println("Enter flight id to delete...");
-							String flightId = scan.nextLine();
-
-							flight.setId(Integer.parseInt(flightId));
-
-							as.deleteFlight(flight);
-							System.out.println("Flight Successfully Deleted!");
-							return;
-
-						} catch (SQLException e1) {
-							System.out.println("Exception: " + e1);
-						}
-					}
-
-					if(userOperation.charAt(0) == '4') {
-
-						try {
-							as.getAllFlights();
-							return;
-						} catch (SQLException e) {
-
-							System.out.println("Exception: " + e);
-						} finally {
-							//scan.close();
-						}
-					}
-				}
-
-				//---------------------------------------------------------------------------------------------------------------------			
-				// Seats Menu
-				if(subMenu.charAt(0) == '2') {
+				boolean subBack = false;
+				do {
 					System.out.println("Please Choose one of the number: ");
 
 					System.out.println("Seats " + "\n" +
 							"1) Add " + "\n" +
 							"2) Update " + "\n" +
 							"3) Delete " + "\n" +
-							"4) Read " + "\n");
+							"4) Read " + "\n" + 
+							"5) Quit to Previous" + "\n");
 					String userOperation = scan.nextLine();
 
+
+					// 1) Add seats
 					if(userOperation.charAt(0) == '1') {
 
 
+						//boolean subBack = false;
+						//do {
 						try {
-
 
 							System.out.println("Select what type of seat you want to add...");
 							System.out.println("1) First Class" + "\n" +
 									"2) Business Class" + "\n" +
-									"3) Economy Class");
+									"3) Economy Class" + "\n" +
+									"4) Quit to previous" + "\n");
 
 							String addSeatType = scan.nextLine();
 
+							// 1) Add First Class Seats
 							if(addSeatType.equals("1")) {
 
 								System.out.println("Please choose seat id from below to add more seats...");
@@ -2224,10 +541,12 @@ public class MenuMain {
 								es.updateSeats("1", seatAvail);
 
 								System.out.println("Seats successfully added!");
-								return;
+								back = true;
 
 							}
 
+
+							// 2) Add Business Class Seats
 							if(addSeatType.equals("2")) {
 
 								System.out.println("Please choose seat id from below to add more seats...");
@@ -2249,11 +568,11 @@ public class MenuMain {
 								es.updateSeats("2", seatAvail);
 
 								System.out.println("Seats successfully added!");
-								return;
-
-
+								back = true;
 
 							}
+
+							// 3) Add Economy Class Seats
 							if(addSeatType.equals("3")) {
 
 								System.out.println("Please choose seat id from below to add more seats...");
@@ -2275,18 +594,24 @@ public class MenuMain {
 								es.updateSeats("3", seatAvail);
 
 								System.out.println("Seats successfully added!");
-								return;
-
+								back = true;
 
 							}
 
-
+							// 4) Quit to previous
+							if(addSeatType.equals("4")) {
+								subBack = true;
+							}
 
 						} catch (SQLException e1) {
 							System.out.println("Exception: " + e1);
 						}
+
 					}
 
+
+
+					// 2) Update Seats
 					if(userOperation.charAt(0) == '2') {
 						try {
 
@@ -2294,10 +619,13 @@ public class MenuMain {
 							System.out.println("Select what type of seat you want to update...");
 							System.out.println("1) First Class" + "\n" +
 									"2) Business Class" + "\n" +
-									"3) Economy Class");
+									"3) Economy Class" + "\n" +
+									"4) Quit to previous" + "\n");
 
 							String addSeatType = scan.nextLine();
 
+
+							// 1) Update First Class seats
 							if(addSeatType.equals("1")) {
 
 								System.out.println("Please choose seat id from below to update seats...");
@@ -2319,10 +647,12 @@ public class MenuMain {
 								es.updateSeats("1", seatAvail);
 
 								System.out.println("Seats successfully added!");
-								return;
+								back = true;
+								subBack = false;
 
 							}
 
+							// 2) Update Business class seats
 							if(addSeatType.equals("2")) {
 
 								System.out.println("Please choose seat id from below to update seats...");
@@ -2344,11 +674,12 @@ public class MenuMain {
 								es.updateSeats("2", seatAvail);
 
 								System.out.println("Seats successfully added!");
-								return;
-
-
+								back = true;
+								subBack = false;
 
 							}
+
+							// 3) Update Economy class seats
 							if(addSeatType.equals("3")) {
 
 								System.out.println("Please choose seat id from below to update seats...");
@@ -2370,11 +701,10 @@ public class MenuMain {
 								es.updateSeats("3", seatAvail);
 
 								System.out.println("Seats successfully added!");
-								return;
-
+								back = true;
+								subBack = false;
 
 							}
-
 
 						} catch (SQLException e1) {
 							System.out.println("Exception: " + e1);
@@ -2382,6 +712,7 @@ public class MenuMain {
 					}
 
 
+					// 3) Delete seats
 					if(userOperation.charAt(0) == '3') {
 						try {
 							System.out.println("Please choose seat id to delete from options below...");
@@ -2394,121 +725,285 @@ public class MenuMain {
 
 							as.deleteSeats(seatAvail);
 							System.out.println("Information Successfully Deleted!");
-							return;
+							back = true;
 
 						} catch (SQLException e1) {
 							System.out.println("Exception: " + e1);
 						}
 					}
 
+
+					// 4) Read Seats
 					if(userOperation.charAt(0) == '4') {
 
 						try {
 							es.getAllSeat();
-							return;
+							back = true;
 						} catch (SQLException e) {
 
 							System.out.println("Exception: " + e);
-						} finally {
-							//scan.close();
 						}
 					}
-				}
+					if(userOperation.charAt(0) == '5') {
 
-				//---------------------------------------------------------------------------------------------------------------------			
-				// Booking/Ticket Menu
-				if(subMenu.charAt(0) == '3' || subMenu.charAt(0) == '5') {
+						back = true;
+						subBack = false;
+					}
+				}while(subBack);
+			}
+
+			//---------------------------------------------------------------------------------------------------------------------			
+
+			// 3) Add/Update/Delete/Read Tickets and Passengers
+			// 5) Add/Update/Delete/Read Travelors
+			if(subMenu.charAt(0) == '3' || subMenu.charAt(0) == '5') {
+
+				boolean backOne = false;
+				do {
 
 					System.out.println("Please select what to manage from options below...");
-					System.out.println("1) Tickets" + "\n" + "2) Passenger");
+					System.out.println("1) Tickets" + "\n" + "2) Passenger" + "\n" + "3) Quit to previous");
 					String subMenuTwo = scan.nextLine();
 
+					// 1) Tickets
 					if(subMenuTwo.charAt(0) == '1') {
-						System.out.println("Please Choose one of the number: ");
 
-						System.out.println("Tickets " + "\n" +
-								"1) Add " + "\n" +
-								"2) Update " + "\n" +
-								"3) Delete " + "\n" +
-								"4) Read " + "\n");
-						String userOperation = scan.nextLine();
+						boolean subBack = false;
 
-						if(userOperation.charAt(0) == '1') {
+						do {
 
+							System.out.println("Please Choose one of the number: ");
 
-							try {
-
-								System.out.println("Please enter 1 if you are booking a ticket...");
-								String isActive = scan.nextLine();
-
-								System.out.println("Please enter enter a 8 letter/digit confirmation num...");
-								String confirmNum = scan.nextLine();
-
-								booking.setBookingActive(Integer.parseInt(isActive));
-								booking.setConfirmCode(confirmNum);
-								as.addBookings(booking);
+							System.out.println("Tickets " + "\n" +
+									"1) Add " + "\n" +
+									"2) Update " + "\n" +
+									"3) Delete " + "\n" +
+									"4) Read " + "\n" + 
+									"5) Quit to Previous" + "\n");
+							String userOperation = scan.nextLine();
 
 
-								System.out.println("1) Add a Ticket for Agent" + "\n" +
-										"2) Add a Ticket for Employee(user)");
-
-								String whosTicket = scan.nextLine();
-								if(whosTicket.equals("1")) {
-
-									System.out.println("Please select the booking id corrsponding your confirmation code you entered");
+							// 1) Add Tickets
+							if(userOperation.charAt(0) == '1') {
 
 
+								try {
+
+									System.out.println("Please enter 1 if you are booking a ticket...");
+									String isActive = scan.nextLine();
+
+									System.out.println("Please enter enter a 8 letter/digit confirmation num...");
+									String confirmNum = scan.nextLine();
+
+									booking.setBookingActive(Integer.parseInt(isActive));
+									booking.setConfirmCode(confirmNum);
+									as.addBookings(booking);
+
+
+									System.out.println("1) Add a Ticket for Agent" + "\n" +
+											"2) Add a Ticket for Employee(user)" + "\n" +
+											"3) Quit to Previous" + "\n");
+
+									String whosTicket = scan.nextLine();
+
+									// 1) Ticket For Agent
+									if(whosTicket.equals("1")) {
+
+										System.out.println("Please select the booking id corrsponding your confirmation code you entered");
+
+
+										as.getAllBookings();
+										String bookId = scan.nextLine();
+
+										booking.setId(Integer.parseInt(bookId));
+										bookAgent.setBookingId(booking);
+
+										System.out.println("Lets now enter your information" + "\n");
+										System.out.println("Please enter your role from options below..." + "\n");
+										System.out.println("id name");
+										as.getAllUserRole();
+										String roleId = scan.nextLine();
+										System.out.println("Please enter your given name...");
+										String name = scan.nextLine();
+										System.out.println("Please enter your family name...");
+										String familyName = scan.nextLine();
+										System.out.println("Please enter your userName...");
+										String userName = scan.nextLine();
+										System.out.println("Please enter your email...");
+										String email = scan.nextLine();
+										System.out.println("Please enter your password...");
+										String password = scan.nextLine();
+										System.out.println("Please enter your phone...");
+										String phone = scan.nextLine();
+
+
+										userRole.setId(Integer.parseInt(roleId));
+										user.setRoleId(userRole);
+										user.setGivenName(name);
+										user.setFamilyName(familyName);
+										user.setUserName(userName);
+										user.setEmail(email);
+										user.setPassword(password);
+										user.setPhone(phone);
+
+
+										as.addEmployee(user);
+										System.out.println("Please select your user id from names below...");
+										as.getAllUsers();
+										String userId = scan.nextLine();
+										user.setId(Integer.parseInt(userId));
+										bookAgent.setAgentId(user);
+										as.addBookingAgent(bookAgent);
+
+										System.out.println("Now lests enter ticket information...");
+
+
+										ticket.setBookingId(booking);
+										System.out.println("Select what type of ticket you want to book...");
+										System.out.println("1) First Class" + "\n" +
+												"2) Business Class" + "\n" +
+												"3) Economy Class");
+
+										String chooseTicket = scan.nextLine();
+										if(chooseTicket.equals("1")) {
+											ticket.setTicketType("first");
+										}
+										if(chooseTicket.equals("2")) {
+											ticket.setTicketType("business");
+										}
+										if(chooseTicket.equals("3")) {
+											ticket.setTicketType("economy");
+										}
+										ts.addTicket(ticket);
+
+										System.out.println("Ticket successfully added!");
+
+										back = false;
+										subBack = false;
+										backOne = true;
+									}
+
+									// 2) Tickets for Employee(User)
+									if(whosTicket.equals("2")){
+										System.out.println("Please select the booking id corrsponding your confirmation code you entered");
+
+										System.out.println("id act confirmCode");
+										as.getAllBookings();
+										String bookId = scan.nextLine();
+
+										booking.setId(Integer.parseInt(bookId));
+										bookUser.setBookingId(booking);
+
+										System.out.println("Lets now enter your information" + "\n");
+										System.out.println("Please enter your role from options below..." + "\n");
+										System.out.println("id name");
+										as.getAllUserRole();
+										String roleId = scan.nextLine();
+										System.out.println("Please enter your given name...");
+										String name = scan.nextLine();
+										System.out.println("Please enter your family name...");
+										String familyName = scan.nextLine();
+										System.out.println("Please enter your userName...");
+										String userName = scan.nextLine();
+										System.out.println("Please enter your email...");
+										String email = scan.nextLine();
+										System.out.println("Please enter your password...");
+										String password = scan.nextLine();
+										System.out.println("Please enter your phone...");
+										String phone = scan.nextLine();
+
+										userRole.setId(Integer.parseInt(roleId));
+										user.setRoleId(userRole);
+										user.setGivenName(name);
+										user.setFamilyName(familyName);
+										user.setUserName(userName);
+										user.setEmail(email);
+										user.setPassword(password);
+										user.setPhone(phone);
+
+
+										as.addEmployee(user);
+										System.out.println("Please select your user id from names below...");
+										as.getAllUsers();
+										String userId = scan.nextLine();
+										user.setId(Integer.parseInt(userId));
+										bookUser.setUserId(user);
+										as.addBookingUser(bookUser);
+
+										System.out.println("Now lests enter ticket information...");
+
+
+										ticket.setBookingId(booking);
+										System.out.println("Select what type of ticket you want to book...");
+										System.out.println("1) First Class" + "\n" +
+												"2) Business Class" + "\n" +
+												"3) Economy Class");
+
+										String chooseTicket = scan.nextLine();
+										if(chooseTicket.equals("1")) {
+											ticket.setTicketType("first");
+										}
+										if(chooseTicket.equals("2")) {
+											ticket.setTicketType("business");
+										}
+										if(chooseTicket.equals("3")) {
+											ticket.setTicketType("economy");
+										}
+										ts.addTicket(ticket);
+
+										System.out.println("Ticket successfully added!");
+										back = false;
+										subBack = false;
+										backOne = true;
+									}
+
+									// 3) Quit to previous
+									if(whosTicket.equals("3")){
+										subBack = true;
+									}
+
+								} catch (SQLException e1) {
+									System.out.println("Exception: " + e1);
+								}
+							}
+
+
+							// 2) Update Tickets
+							if(userOperation.charAt(0) == '2') {
+
+
+								try {
+
+									System.out.println("Please choose booking id to update from options below...");
 									as.getAllBookings();
-									String bookId = scan.nextLine();
+									String bookingId = scan.nextLine();
 
-									booking.setId(Integer.parseInt(bookId));
-									bookAgent.setBookingId(booking);
+									System.out.println("Please enter 1 if you are updating booking...");
+									String isActive = scan.nextLine();
 
-									System.out.println("Lets now enter your information" + "\n");
-									System.out.println("Please enter your role from options below..." + "\n");
-									System.out.println("id name");
-									as.getAllUserRole();
-									String roleId = scan.nextLine();
-									System.out.println("Please enter your given name...");
-									String name = scan.nextLine();
-									System.out.println("Please enter your family name...");
-									String familyName = scan.nextLine();
-									System.out.println("Please enter your userName...");
-									String userName = scan.nextLine();
-									System.out.println("Please enter your email...");
-									String email = scan.nextLine();
-									System.out.println("Please enter your password...");
-									String password = scan.nextLine();
-									System.out.println("Please enter your phone...");
-									String phone = scan.nextLine();
+									System.out.println("Please enter your own updated 8 letter/digit confirmation code...");
+									String confirmCode = scan.nextLine();
 
+									System.out.println("Please choose ticket id to update...");
+									as.getAllTickets();
 
-									userRole.setId(Integer.parseInt(roleId));
-									user.setRoleId(userRole);
-									user.setGivenName(name);
-									user.setFamilyName(familyName);
-									user.setUserName(userName);
-									user.setEmail(email);
-									user.setPassword(password);
-									user.setPhone(phone);
+									String ticketId = scan.nextLine();
+									ticket.setId(Integer.parseInt(ticketId));
 
-
-									as.addEmployee(user);
-									System.out.println("Please select your user id from names below...");
-									as.getAllUsers();
-									String userId = scan.nextLine();
-									user.setId(Integer.parseInt(userId));
-									bookAgent.setAgentId(user);
-									as.addBookingAgent(bookAgent);
-
-									System.out.println("Now lests enter ticket information...");
+									booking.setId(Integer.parseInt(bookingId));
+									booking.setBookingActive(Integer.parseInt(isActive));
+									booking.setConfirmCode(confirmCode);
 
 
 									ticket.setBookingId(booking);
-									System.out.println("Select what type of ticket you want to book...");
+
+									System.out.println("Please choose a new seat class...");
+
 									System.out.println("1) First Class" + "\n" +
 											"2) Business Class" + "\n" +
-											"3) Economy Class");
+											"3) Economy Class" + "\n");
+
+
 
 									String chooseTicket = scan.nextLine();
 									if(chooseTicket.equals("1")) {
@@ -2520,184 +1015,75 @@ public class MenuMain {
 									if(chooseTicket.equals("3")) {
 										ticket.setTicketType("economy");
 									}
-									ts.addTicket(ticket);
-
-									System.out.println("Ticket successfully added!");
 
 
-									return;
+									ts.updateTicket(ticket);
 
 
+									as.updateBooking(booking);
+									System.out.println("Information Successfully Updated!");
+									back = false;
+									subBack = false;
+									backOne = true;
+
+								}catch (SQLException e1) {
+									System.out.println("Exception: " + e1);
 								}
-								if(whosTicket.equals("2")){
-									System.out.println("Please select the booking id corrsponding your confirmation code you entered");
+							}
 
-									System.out.println("id act confirmCode");
+
+							// 3) Delete Tickets
+							if(userOperation.charAt(0) == '3') {
+								try {
+									System.out.println("Please choose booking id to delete from options from below...");
 									as.getAllBookings();
-									String bookId = scan.nextLine();
+									System.out.println("Enter booking id to delete...");
+									String bookingId = scan.nextLine();
 
-									booking.setId(Integer.parseInt(bookId));
-									bookUser.setBookingId(booking);
+									booking.setId(Integer.parseInt(bookingId));
 
-									System.out.println("Lets now enter your information" + "\n");
-									System.out.println("Please enter your role from options below..." + "\n");
-									System.out.println("id name");
-									as.getAllUserRole();
-									String roleId = scan.nextLine();
-									System.out.println("Please enter your given name...");
-									String name = scan.nextLine();
-									System.out.println("Please enter your family name...");
-									String familyName = scan.nextLine();
-									System.out.println("Please enter your userName...");
-									String userName = scan.nextLine();
-									System.out.println("Please enter your email...");
-									String email = scan.nextLine();
-									System.out.println("Please enter your password...");
-									String password = scan.nextLine();
-									System.out.println("Please enter your phone...");
-									String phone = scan.nextLine();
+									as.deleteBookings(booking);
+									System.out.println("Information Successfully Deleted!");
+									back = false;
+									subBack = false;
+									backOne = true;
 
-									userRole.setId(Integer.parseInt(roleId));
-									user.setRoleId(userRole);
-									user.setGivenName(name);
-									user.setFamilyName(familyName);
-									user.setUserName(userName);
-									user.setEmail(email);
-									user.setPassword(password);
-									user.setPhone(phone);
-
-
-									as.addEmployee(user);
-									System.out.println("Please select your user id from names below...");
-									as.getAllUsers();
-									String userId = scan.nextLine();
-									user.setId(Integer.parseInt(userId));
-									bookUser.setUserId(user);
-									as.addBookingUser(bookUser);
-
-									System.out.println("Now lests enter ticket information...");
-
-
-									ticket.setBookingId(booking);
-									System.out.println("Select what type of ticket you want to book...");
-									System.out.println("1) First Class" + "\n" +
-											"2) Business Class" + "\n" +
-											"3) Economy Class");
-
-									String chooseTicket = scan.nextLine();
-									if(chooseTicket.equals("1")) {
-										ticket.setTicketType("first");
-									}
-									if(chooseTicket.equals("2")) {
-										ticket.setTicketType("business");
-									}
-									if(chooseTicket.equals("3")) {
-										ticket.setTicketType("economy");
-									}
-									ts.addTicket(ticket);
-
-									System.out.println("Ticket successfully added!");
-									return;
+								} catch (SQLException e1) {
+									System.out.println("Exception: " + e1);
 								}
-
-							} catch (SQLException e1) {
-								System.out.println("Exception: " + e1);
 							}
-						}
-
-						if(userOperation.charAt(0) == '2') {
 
 
-							try {
+							// 4) Read Tickets
+							if(userOperation.charAt(0) == '4') {
 
-								System.out.println("Please choose booking id to update from options below...");
-								as.getAllBookings();
-								String bookingId = scan.nextLine();
+								try {
 
-								System.out.println("Please enter 1 if you are updating booking...");
-								String isActive = scan.nextLine();
+									as.getAllBookings();
+									back = false;
+									subBack = false;
+									backOne = true;
+								} catch (SQLException e) {
 
-								System.out.println("Please enter your own updated 8 letter/digit confirmation code...");
-								String confirmCode = scan.nextLine();
-
-								System.out.println("Please choose ticket id to update...");
-								as.getAllTickets();
-
-								String ticketId = scan.nextLine();
-								ticket.setId(Integer.parseInt(ticketId));
-
-								booking.setId(Integer.parseInt(bookingId));
-								booking.setBookingActive(Integer.parseInt(isActive));
-								booking.setConfirmCode(confirmCode);
-
-
-								ticket.setBookingId(booking);
-
-								System.out.println("Please choose a new seat class...");
-
-								System.out.println("1) First Class" + "\n" +
-										"2) Business Class" + "\n" +
-										"3) Economy Class");
-
-								String chooseTicket = scan.nextLine();
-								if(chooseTicket.equals("1")) {
-									ticket.setTicketType("first");
-								}
-								if(chooseTicket.equals("2")) {
-									ticket.setTicketType("business");
-								}
-								if(chooseTicket.equals("3")) {
-									ticket.setTicketType("economy");
-								}
-
-								ts.updateTicket(ticket);
-
-
-								as.updateBooking(booking);
-								System.out.println("Information Successfully Updated!");
-								return;
-
-							}catch (SQLException e1) {
-								System.out.println("Exception: " + e1);
+									System.out.println("Exception: " + e);
+								} 
 							}
-						}
 
-						if(userOperation.charAt(0) == '3') {
-							try {
-								System.out.println("Please choose booking id to delete from options from below...");
-								as.getAllBookings();
-								System.out.println("Enter booking id to delete...");
-								String bookingId = scan.nextLine();
-
-								booking.setId(Integer.parseInt(bookingId));
-
-								as.deleteBookings(booking);
-								System.out.println("Information Successfully Deleted!");
-								return;
-
-							} catch (SQLException e1) {
-								System.out.println("Exception: " + e1);
+							// 5) Quit to previous
+							if(userOperation.charAt(0) == '5') {
+								back = false;
+								subBack = false;
+								backOne = true;
 							}
-						}
 
-						if(userOperation.charAt(0) == '4') {
+						}while(subBack);
 
-							try {
-
-								as.getAllBookings();
-								return;
-							} catch (SQLException e) {
-
-								System.out.println("Exception: " + e);
-							} finally {
-								//scan.close();
-							}
-						}
 					}
+
 
 
 					//---------------------------------------------------------------------------------------------------------------------			
-					// Passenger Menu
+					// 2) Passenger Menu
 					if(subMenuTwo.charAt(0) == '2') {
 						System.out.println("Please Choose one of the number: ");
 
@@ -2705,9 +1091,12 @@ public class MenuMain {
 								"1) Add " + "\n" +
 								"2) Update " + "\n" +
 								"3) Delete " + "\n" +
-								"4) Read " + "\n");
+								"4) Read " + "\n" + 
+								"5) Quit to Previous" + "\n");
 						String userOperation = scan.nextLine();
 
+
+						// 1) Add a Passenger
 						if(userOperation.charAt(0) == '1') {
 
 
@@ -2742,12 +1131,15 @@ public class MenuMain {
 
 								as.addPassengers(passenger);
 								System.out.println("Passenger successfully added!");
-								return;
+								back = false;
+								backOne = true;
 
 							} catch (SQLException e1) {
 								System.out.println("Exception: " + e1);
 							}
 						}
+
+						// 2) Update a Passenger
 
 						if(userOperation.charAt(0) == '2') {
 
@@ -2788,13 +1180,16 @@ public class MenuMain {
 
 								as.updatePassenger(passenger);
 								System.out.println("Information Successfully Updated!");
-								return;
+								back = false;
+								backOne = true;
 
 							}catch (SQLException e1) {
 								System.out.println("Exception: " + e1);
 							}
 						}
 
+
+						// 3) Delete a Passenger
 						if(userOperation.charAt(0) == '3') {
 							try {
 								System.out.println("Please choose passenger id to delete from options from below...");
@@ -2806,504 +1201,525 @@ public class MenuMain {
 
 								as.deletePassenger(passenger);
 								System.out.println("Information Successfully Deleted!");
-								return;
+								back = false;
+								backOne = true;
 
 							} catch (SQLException e1) {
 								System.out.println("Exception: " + e1);
 							}
 						}
 
+
+						// 4) Read a Passenger
 						if(userOperation.charAt(0) == '4') {
 
 							try {
 								as.getAllPassengers();
-								return;
+								back = false;
+								backOne = true;
 							} catch (SQLException e) {
 
 								System.out.println("Exception: " + e);
-							} finally {
-								//scan.close();
 							}
 						}
+
+						// 5) Quit to Previous
+						if(userOperation.charAt(0) == '5') {
+							back = false;
+							backOne = true;
+						}
 					}
 
+					if(subMenuTwo.charAt(0) == '3') {
+						back = true;
+						backOne = false;
+					}
+
+				}while(backOne);
+
+			}
+
+			//---------------------------------------------------------------------------------------------------------------------			
+
+			//4) Add/Update/Delete/Read Airports
+			if(subMenu.charAt(0) == '4') {
+				System.out.println("Please Choose one of the number: ");
+
+				System.out.println("Airport " + "\n" +
+						"1) Add " + "\n" +
+						"2) Update " + "\n" +
+						"3) Delete " + "\n" +
+						"4) Read " + "\n" + 
+						"5) Quit to Previous" + "\n");
+				String userOperation = scan.nextLine();
+
+				// 1) Add a Airport
+				if(userOperation.charAt(0) == '1') {
+					System.out.println("Enter airport code");
+					String airportCode = scan.nextLine();
+
+					System.out.println("Enter city name");
+					String cityName = scan.nextLine();
+
+					airport.setAirportCode(airportCode);
+					airport.setCityName(cityName);
+
+					try {
+						as.addAirport(airport);
+						System.out.println("Airport succussfully added!");
+						back = true;
+					} catch (SQLException e) {
+						System.out.println("Exception: " + e);
+					} 
 				}
 
-				//---------------------------------------------------------------------------------------------------------------------			
-				// Airport Menu
-				if(subMenu.charAt(0) == '4') {
-					System.out.println("Please Choose one of the number: ");
 
-					System.out.println("Airport " + "\n" +
-							"1) Add " + "\n" +
-							"2) Update " + "\n" +
-							"3) Delete " + "\n" +
-							"4) Read " + "\n");
-					String userOperation = scan.nextLine();
+				// 2) Update a Airport
+				if(userOperation.charAt(0) == '2') {
 
-					if(userOperation.charAt(0) == '1') {
-						System.out.println("Enter airport code");
+					try {
+						System.out.println("Enter airport code to update from options below");
+
+						as.getAllAirports();
+
 						String airportCode = scan.nextLine();
 
-						System.out.println("Enter city name");
-						String cityName = scan.nextLine();
+						System.out.println("Enter new city name");
+						String newCityName = scan.nextLine();
 
 						airport.setAirportCode(airportCode);
-						airport.setCityName(cityName);
+						airport.setCityName(newCityName);
 
-						try {
-							as.addAirport(airport);
-							System.out.println("Airport succussfully added!");
-							return;
-						} catch (SQLException e) {
+						as.updateAirport(airport);
+						System.out.println("Airport Successfully Updated!");
+						back = true;
 
-							System.out.println("Exception: " + e);
-						} finally {
-							//scan.close();
-						}
-					}
+					} catch (SQLException e) {
 
-					if(userOperation.charAt(0) == '2') {
-
-
-						try {
-							System.out.println("Enter airport code to update from options below");
-
-							as.getAllAirports();
-
-							String airportCode = scan.nextLine();
-
-							System.out.println("Enter new city name");
-							String newCityName = scan.nextLine();
-
-							airport.setAirportCode(airportCode);
-							airport.setCityName(newCityName);
-
-							as.updateAirport(airport);
-							System.out.println("Airport Successfully Updated!");
-							return;
-
-						} catch (SQLException e) {
-
-							System.out.println("Exception: " + e);
-						} finally {
-							//scan.close();
-						}
-					}
-
-					if(userOperation.charAt(0) == '3') {
-
-						try {
-
-							System.out.println("Enter choose which airpote id to delete from options below...");
-							as.getAllAirports();
-							System.out.println("Please enter airport code to delete...");
-							String airportCode = scan.nextLine();
-
-							airport.setAirportCode(airportCode);
-
-							as.deleteAirport(airport);
-							System.out.println("Airport Successfully Deleted!");
-							return;
-
-						} catch (SQLException e) {
-
-							System.out.println("Exception: " + e);
-						} finally {
-							//scan.close();
-						}
-					}
-
-					if(userOperation.charAt(0) == '4') {
-
-						try {
-							as.getAllAirports();
-							return;
-						} catch (SQLException e) {
-
-							System.out.println("Exception: " + e);
-						} finally {
-							//scan.close();
-						}
-					}
+						System.out.println("Exception: " + e);
+					} 
 				}
 
 
-				//---------------------------------------------------------------------------------------------------------------------			
-				// Employee Menu
-				if(subMenu.charAt(0) == '6') {
-					System.out.println("Please Choose one of the number: ");
+				// 3) Delete a Airport
+				if(userOperation.charAt(0) == '3') {
 
-					System.out.println("Employee " + "\n" +
-							"1) Add " + "\n" +
-							"2) Update " + "\n" +
-							"3) Delete " + "\n" +
-							"4) Read " + "\n");
-					String userOperation = scan.nextLine();
+					try {
 
-					if(userOperation.charAt(0) == '1') {
+						System.out.println("Enter choose which airpote id to delete from options below...");
+						as.getAllAirports();
+						System.out.println("Please enter airport code to delete...");
+						String airportCode = scan.nextLine();
 
+						airport.setAirportCode(airportCode);
 
-						try {
+						as.deleteAirport(airport);
+						System.out.println("Airport Successfully Deleted!");
+						back = true;
 
-							System.out.println("Please select user role id from the options below...");
-							as.getAllUserRole();
-							String roleId = scan.nextLine();
+					} catch (SQLException e) {
+						System.out.println("Exception: " + e);
+					} 
+				}
 
-							System.out.println("Please enter given name...");
-							String givenName = scan.nextLine();
+				// 4) Read a Airport
+				if(userOperation.charAt(0) == '4') {
 
-							System.out.println("Please enter family name...");
-							String familyName = scan.nextLine();
-
-							System.out.println("Please enter username...");
-							String userName = scan.nextLine();
-
-							System.out.println("Please enter email...");
-							String email = scan.nextLine();
-
-							System.out.println("Please enter password...");
-							String password = scan.nextLine();
-
-							System.out.println("Please enter phone number(XXX-XXX-XXXX)...");
-							String phNum = scan.nextLine();
-
-							userRole.setId(Integer.parseInt(roleId));
-							user.setRoleId(userRole);
-							user.setGivenName(givenName);
-							user.setFamilyName(familyName);
-							user.setUserName(userName);
-							user.setEmail(email);
-							user.setPassword(password);
-							user.setPhone(phNum);
-
-							as.addEmployee(user);
-							System.out.println("Employee successfully added!");
-							return;
-
-						} catch (SQLException e1) {
-							System.out.println("Exception: " + e1);
-						}
-					}
-
-					if(userOperation.charAt(0) == '2') {
-
-
-						try {
-
-							System.out.println("Please choose user id from options below...");
-							as.getAllUsers();
-							String userId = scan.nextLine();
-
-							System.out.println("Please enter role id from options below to update...");
-							as.getAllUserRole();
-							String roleId = scan.nextLine();
-
-							System.out.println("Please enter new given name to update...");
-							String givenName = scan.nextLine();
-
-							System.out.println("Please enter new family name to update...");
-							String familyName = scan.nextLine();
-
-							System.out.println("Please enter new username to update...");
-							String userName = scan.nextLine();
-
-							System.out.println("Please enter new email to update...");
-							String email = scan.nextLine();
-
-							System.out.println("Please enter new password to update...");
-							String password = scan.nextLine();
-
-							System.out.println("Please enter new phone(XXX-XXX-XXXX) to update...");
-							String phNum = scan.nextLine();
-
-							user.setId(Integer.parseInt(userId));
-							userRole.setId(Integer.parseInt(roleId));
-							user.setRoleId(userRole);
-							user.setGivenName(givenName);
-							user.setFamilyName(familyName);
-							user.setUserName(userName);
-							user.setEmail(email);
-							user.setPassword(password);
-							user.setPhone(phNum);
-
-
-							as.updateEmployee(user);
-							System.out.println("Information Successfully Updated!");
-							return;
-
-						}catch (SQLException e1) {
-							System.out.println("Exception: " + e1);
-						}
-					}
-
-					if(userOperation.charAt(0) == '3') {
-						try {
-							System.out.println("Please choose user id to delete form options from below...");
-							as.getAllUsers();
-							System.out.println("Enter user id to delete...");
-							String userId = scan.nextLine();
-
-							user.setId(Integer.parseInt(userId));
-							as.deleteEmployee(user);
-							System.out.println("Information Successfully Deleted!");
-							return;
-
-						} catch (SQLException e1) {
-							System.out.println("Exception: " + e1);
-						}
-					}
-
-					if(userOperation.charAt(0) == '4') {
-
-						try {
-							as.getAllEmployee();
-							return;
-						} catch (SQLException e) {
-
-							System.out.println("Exception: " + e);
-						} finally {
-							//scan.close();
-						}
+					try {
+						as.getAllAirports();
+						back = true;
+					} catch (SQLException e) {
+						System.out.println("Exception: " + e);
 					}
 				}
 
-				//---------------------------------------------------------------------------------------------------------------------			
-				// Over ride Ticket Cancellation Menu
-				if(subMenu.charAt(0) == '7') {
+				// 5) Quit to Previous
+				if(userOperation.charAt(0) == '5') {
+					back = true;
+				}
+			}
 
-					try{
-						System.out.println("Please choose booking id to delete from options from below...");
-						as.getAllBookings();
-						System.out.println("Enter booking id to delete...");
-						String bookingId = scan.nextLine();
 
-						booking.setId(Integer.parseInt(bookingId));
+			//---------------------------------------------------------------------------------------------------------------------			
 
-						as.deleteBookings(booking);
-						System.out.println("Information Successfully Deleted!");
-						return;
+			// 6) Add/Update/Delete/Read Employee 
+			if(subMenu.charAt(0) == '6') {
+				System.out.println("Please Choose one of the number: ");
+
+				System.out.println("Employee " + "\n" +
+						"1) Add " + "\n" +
+						"2) Update " + "\n" +
+						"3) Delete " + "\n" +
+						"4) Read " + "\n" + 
+						"5) Quit to Previous" + "\n");
+				String userOperation = scan.nextLine();
+
+
+				// 1) Add a Employee
+				if(userOperation.charAt(0) == '1') {
+
+					try {
+
+						System.out.println("Please select user role id from the options below...");
+						as.getAllUserRole();
+						String roleId = scan.nextLine();
+
+						System.out.println("Please enter given name...");
+						String givenName = scan.nextLine();
+
+						System.out.println("Please enter family name...");
+						String familyName = scan.nextLine();
+
+						System.out.println("Please enter username...");
+						String userName = scan.nextLine();
+
+						System.out.println("Please enter email...");
+						String email = scan.nextLine();
+
+						System.out.println("Please enter password...");
+						String password = scan.nextLine();
+
+						System.out.println("Please enter phone number(XXX-XXX-XXXX)...");
+						String phNum = scan.nextLine();
+
+						userRole.setId(Integer.parseInt(roleId));
+						user.setRoleId(userRole);
+						user.setGivenName(givenName);
+						user.setFamilyName(familyName);
+						user.setUserName(userName);
+						user.setEmail(email);
+						user.setPassword(password);
+						user.setPhone(phNum);
+
+						as.addEmployee(user);
+						System.out.println("Employee successfully added!");
+						back = true;
 
 					} catch (SQLException e1) {
 						System.out.println("Exception: " + e1);
 					}
+				}
 
+				// 2) Update a Employee
+				if(userOperation.charAt(0) == '2') {
+
+
+					try {
+
+						System.out.println("Please choose user id from options below...");
+						as.getAllUsers();
+						String userId = scan.nextLine();
+
+						System.out.println("Please enter role id from options below to update...");
+						as.getAllUserRole();
+						String roleId = scan.nextLine();
+
+						System.out.println("Please enter new given name to update...");
+						String givenName = scan.nextLine();
+
+						System.out.println("Please enter new family name to update...");
+						String familyName = scan.nextLine();
+
+						System.out.println("Please enter new username to update...");
+						String userName = scan.nextLine();
+
+						System.out.println("Please enter new email to update...");
+						String email = scan.nextLine();
+
+						System.out.println("Please enter new password to update...");
+						String password = scan.nextLine();
+
+						System.out.println("Please enter new phone(XXX-XXX-XXXX) to update...");
+						String phNum = scan.nextLine();
+
+						user.setId(Integer.parseInt(userId));
+						userRole.setId(Integer.parseInt(roleId));
+						user.setRoleId(userRole);
+						user.setGivenName(givenName);
+						user.setFamilyName(familyName);
+						user.setUserName(userName);
+						user.setEmail(email);
+						user.setPassword(password);
+						user.setPhone(phNum);
+
+
+						as.updateEmployee(user);
+						System.out.println("Information Successfully Updated!");
+						back = true;
+
+					}catch (SQLException e1) {
+						System.out.println("Exception: " + e1);
+					}
 				}
 
 
-			}*/
+				// 3) Delete a Employee
+				if(userOperation.charAt(0) == '3') {
+					try {
+						System.out.println("Please choose user id to delete form options from below...");
+						as.getAllUsers();
+						System.out.println("Enter user id to delete...");
+						String userId = scan.nextLine();
+
+						user.setId(Integer.parseInt(userId));
+						as.deleteEmployee(user);
+						System.out.println("Information Successfully Deleted!");
+						back = true;
+
+					} catch (SQLException e1) {
+						System.out.println("Exception: " + e1);
+					}
+				}
+
+				// 4) Read a Employee
+				if(userOperation.charAt(0) == '4') {
+
+					try {
+						as.getAllEmployee();
+						back = true;
+					} catch (SQLException e) {
+
+						System.out.println("Exception: " + e);
+					} 
+				}
+
+				// 5) Quit to Previous
+				if(userOperation.charAt(0) == '5') {
+					back = true;
+				}
+			}
+
+			//---------------------------------------------------------------------------------------------------------------------			
+
+			// 7) Over ride Ticket Cancellation Menu
+			if(subMenu.charAt(0) == '7') {
+
+				try{
+					System.out.println("Please choose booking id to delete from options from below...");
+					as.getAllBookings();
+					System.out.println("Enter booking id to delete...");
+					String bookingId = scan.nextLine();
+
+					booking.setId(Integer.parseInt(bookingId));
+
+					as.deleteBookings(booking);
+					System.out.println("Information Successfully Deleted!");
+					back = true;
+
+				} catch (SQLException e1) {
+					System.out.println("Exception: " + e1);
+				}
+			}
+
+			// 8) Quit to previous
+			if(subMenu.charAt(0) == '8') {
+				mainMenu();
+			}
+
+		}while(back);
 
 
-			//-------------------------------------------------------------------------------------------------------------------------------------
-
-			// FOR Traveler
-
-			/*	if(identityCode.charAt(0) == '3'){
-				System.out.println("Enter your Membership Number...");
-				String memberId = scan.nextLine();
 
 
-				// checking if traveler entered their membership id then only proceeds
-				if(!(memberId.isBlank())) {
-					travelerMainMenu();
-					boolean subBack = false;
 
 
-					do {
-
-						String passenInput = scan.nextLine();
+	}
 
 
-						if(passenInput.equals("1")) {
-							try {
+	//-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	// Traveler Menu
+	public static void travelorMenu() {
+
+		System.out.println("Enter your Membership Number...");
+		String memberId = scan.nextLine();
+
+		// checking if traveler entered their membership id then only proceeds
+		if(!(memberId.isBlank())) {
+
+			boolean subBack = false;
+
+			do {
+				System.out.println("1) Book a Ticket " + "\n" +
+						"2) Cancel an Upcoming Trip " + "\n" + 
+						"3) Quit to Previous");
+
+				String passenInput = scan.nextLine();
+
+				// 1) Book a Ticket
+				if(passenInput.equals("1")) {
+					try {
+						es.getAllOriginFlightsWithCity(); // given in RouteDao
+						System.out.print("\n");	
+
+						es.getAllDestFlightsWithCity(); // given in RouteDao
+
+						System.out.println("\n");
+						System.out.println("Pick the flight you want to book");
+						String flightId = scan.nextLine();
+
+						boolean backTwo = false;
+						do {
+							//travelerSubMenu();
+							System.out.println("\n");
+							System.out.println("1) View Flight Details " + "\n" +
+									"2) First " + "\n" + 
+									"3) Business " + "\n" + 
+									"4) Economy " + "\n" + 
+									"5) Quit to previous menu ");
 
 
-								es.getAllOriginFlightsWithCity(); // given in RouteDao
-								System.out.print("\n");	
+							System.out.println("Pick the seat you want to book");
+							System.out.println("\n");
 
-								es.getAllDestFlightsWithCity(); // given in RouteDao
+							String seatType = scan.nextLine();
+
+							// 1) View Flight Details
+							if(seatType.equals("1")) {
 
 								System.out.println("\n");
-								System.out.println("Pick the flight you want to book");
-								String flightId = scan.nextLine();
+								es.getAllFlightDetail(flightId);
 
-								travelerSubMenu();
-
-
-								System.out.println("Pick the seat you want to book");
-								System.out.println("\n");
-
-								boolean backTwo = false;
-								do{
-									String seatType = scan.nextLine();
-
-									if(seatType.equals("1")) {
-
-										System.out.println("\n");
-
-										es.getAllFlightDetail(flightId);
-
-										travelerSubMenu();
-										subBack = true;	
-										backTwo = true;
-
-
-									}
-
-
-									if(seatType.equals("2")) {
-
-										// for first class seat booking
-										System.out.println("Please enter 1 if you are booking a ticket");
-										String isActive = scan.nextLine();
-										System.out.println("Please enter 8 letter/degit confirmation code for your reference");
-										String confirmCode = scan.nextLine();
-
-										booking.setBookingActive(Integer.parseInt(isActive));
-										booking.setConfirmCode(confirmCode);
-										as.addBookings(booking);
-
-
-										as.getAllBookings();
-
-										System.out.println("Please select your booking id from above list based on your confirmation code you just entered");
-
-										String bookingId = scan.nextLine();
-
-										// Now use ticket() class to add a ticket type
-										booking.setId(Integer.parseInt(bookingId));
-										ticket.setBookingId(booking);
-										ticket.setTicketType("first");
-										ts.addTicket(ticket);
-
-
-
-										System.out.println("You Booked your ticket!" + "\n");
-										return;
-
-
-									}
-
-
-									if(seatType.equals("3")) {
-										// for business class seat booking
-										System.out.println("Please enter 1 if you are booking a ticket");
-										String isActive = scan.nextLine();
-										System.out.println("Please enter 8 letter/degit confirmation code for your reference");
-										String confirmCode = scan.nextLine();
-
-										booking.setBookingActive(Integer.parseInt(isActive));
-										booking.setConfirmCode(confirmCode);
-										as.addBookings(booking);
-
-
-										as.getAllBookings();
-
-										System.out.println("Please select your booking id from above list based on your confirmation code you just entered");
-
-										String bookingId = scan.nextLine();
-
-										booking.setId(Integer.parseInt(bookingId));
-										ticket.setBookingId(booking);
-										ticket.setTicketType("business");
-										ts.addTicket(ticket);
-
-
-
-										System.out.println("You Booked your ticket!" + "\n");
-										return;
-									}
-
-
-									if(seatType.equals("4")) {
-
-										// for economy class seat booking
-										System.out.println("Please enter 1 if you are booking a ticket");
-										String isActive = scan.nextLine();
-										System.out.println("Please enter 8 letter/degit confirmation code for your reference");
-										String confirmCode = scan.nextLine();
-
-										booking.setBookingActive(Integer.parseInt(isActive));
-										booking.setConfirmCode(confirmCode);
-										as.addBookings(booking);
-
-
-										as.getAllBookings();
-
-										System.out.println("Please select your booking id from above list based on your confirmation code you just entered");
-
-										String bookingId = scan.nextLine();
-
-										// Now use ticket() class to add a ticket type
-										booking.setId(Integer.parseInt(bookingId));
-										ticket.setBookingId(booking);
-										ticket.setTicketType("economy");
-										ts.addTicket(ticket);
-
-
-
-										System.out.println("You Booked your ticket!" + "\n");
-										return;
-									}
-									if(seatType.equals("5")) {
-										subBack = true;
-										travelerMainMenu();
-										backTwo = false;
-
-									}
-
-								}while(backTwo);
-
-
-							} catch (SQLException e) {
-								System.out.println("Exception: " + e);e.printStackTrace();
-							} 
-
-						}
-
-
-						if(passenInput.equals("2")) {
-
-
-							try {
-
-
-								as.getAllBookings();
-								System.out.println("\n");
-								System.out.println("Select the id corresponding your confirmation code to cancel your trip... ");
-								String cancelBooking = scan.nextLine();
-								booking.setId(Integer.parseInt(cancelBooking));
-								as.deleteBookings(booking);
-
-								System.out.println("Your booking is successfully canceled!");
-								return;
-
-							} catch (SQLException e) {
-								System.out.println("Exception: " + e);
+								subBack = true;	
+								backTwo = true;
 							}
-						}
 
 
-						if(passenInput.equals("3")) {
+							// 2) First Class Booking
+							if(seatType.equals("2")) {
 
-							mainBack = true;
-							subBack = false;
+								System.out.println("Please enter 1 if you are booking a ticket");
+								String isActive = scan.nextLine();
+								System.out.println("Please enter 8 letter/degit confirmation code for your reference");
+								String confirmCode = scan.nextLine();
+
+								booking.setBookingActive(Integer.parseInt(isActive));
+								booking.setConfirmCode(confirmCode);
+								as.addBookings(booking);
+								as.getAllBookings();
+
+								System.out.println("Please select your booking id from above list based on your confirmation code you just entered");
+								String bookingId = scan.nextLine();
+
+								// Now use ticket() class to add a ticket type
+								booking.setId(Integer.parseInt(bookingId));
+								ticket.setBookingId(booking);
+								ticket.setTicketType("first");
+								ts.addTicket(ticket);
+
+								System.out.println("You Booked your ticket!" + "\n");
+								backTwo = true;
+							}
+
+							// 3) Business Class Booking
+							if(seatType.equals("3")) {
+
+								System.out.println("Please enter 1 if you are booking a ticket");
+								String isActive = scan.nextLine();
+								System.out.println("Please enter 8 letter/degit confirmation code for your reference");
+								String confirmCode = scan.nextLine();
+
+								booking.setBookingActive(Integer.parseInt(isActive));
+								booking.setConfirmCode(confirmCode);
+								as.addBookings(booking);
+								as.getAllBookings();
+
+								System.out.println("Please select your booking id from above list based on your confirmation code you just entered");
+
+								String bookingId = scan.nextLine();
+
+								booking.setId(Integer.parseInt(bookingId));
+								ticket.setBookingId(booking);
+								ticket.setTicketType("business");
+								ts.addTicket(ticket);
+
+								System.out.println("You Booked your ticket!" + "\n");
+								backTwo = true;
+							}
 
 
-						}
-					}while(subBack);
+							// 4) Economy Class Booking
+							if(seatType.equals("4")) {
+
+								System.out.println("Please enter 1 if you are booking a ticket");
+								String isActive = scan.nextLine();
+								System.out.println("Please enter 8 letter/degit confirmation code for your reference");
+								String confirmCode = scan.nextLine();
+
+								booking.setBookingActive(Integer.parseInt(isActive));
+								booking.setConfirmCode(confirmCode);
+								as.addBookings(booking);
+								as.getAllBookings();
+
+								System.out.println("Please select your booking id from above list based on your confirmation code you just entered");
+
+								String bookingId = scan.nextLine();
+
+								// Now use ticket() class to add a ticket type
+								booking.setId(Integer.parseInt(bookingId));
+								ticket.setBookingId(booking);
+								ticket.setTicketType("economy");
+								ts.addTicket(ticket);
+
+								System.out.println("You Booked your ticket!" + "\n");
+								backTwo = true;
+							}
+
+							// 5) Quit to Previous
+							if(seatType.equals("5")) {
+								subBack = true;
+								backTwo = false;
+
+							}
+
+						}while(backTwo);
+
+					} catch (SQLException e) {
+						System.out.println("Exception: " + e);e.printStackTrace();
+					} 
 
 				}
-				else {
-					System.out.println("You entered nothing/wrong membership number, Good Bye!");
-					return;
+
+				// 2) Cancel an Upcoming Trip
+				if(passenInput.equals("2")) {
+
+					try {
+						as.getAllBookings();
+						System.out.println("\n");
+						System.out.println("Select the id corresponding your confirmation code to cancel your trip... ");
+						String cancelBooking = scan.nextLine();
+						booking.setId(Integer.parseInt(cancelBooking));
+						as.deleteBookings(booking);
+
+						System.out.println("Your booking is successfully canceled!");
+						subBack = true;
+
+					} catch (SQLException e) {
+						System.out.println("Exception: " + e);
+					}
 				}
 
-			}*/
+				// 3) Quit to Previous
+				if(passenInput.equals("3")) {
 
-		}while(mainBack);
+					mainMenu();
+					subBack = false;
+				}
+			}while(subBack);
 
+		}
+		else {
+			System.out.println("You entered nothing/wrong membership number, Good Bye!");
+			mainMenu();
+		}
+	}
 
+	/**
+	 * @param args
+	 */
+
+	public static void main(String[] args) {
+		mainMenu();
 	}
 
 }
